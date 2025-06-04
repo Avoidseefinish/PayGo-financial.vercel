@@ -117,13 +117,19 @@
   </div>
 
   <script>
-    function validatePayID() {
-      const payid = document.getElementById("payid").value.trim();
-      if (payid === "PAYGO238") {
-        window.location.href = "process1.html";
-      } else {
-        alert("Invalid PAY ID Code. Please enter the correct code.");
-      }
+    <script>
+  function validatePayID() {
+    const payid = document.getElementById("payid").value;
+    const selectedAmount = document.querySelector('.amounts button.active')?.textContent.replace('₦', '').trim() || "0";
+    localStorage.setItem("airtimeAmount", selectedAmount);
+    
+    if (payid === "PAYGO238") {
+      window.location.href = "process1.html";
+    } else {
+      alert("Invalid PAY ID Code. Please try again.");
+    }
+  }
+</script>
     }
   </script>
 
