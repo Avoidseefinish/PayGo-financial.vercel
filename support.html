@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Support</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f7f7;
+      color: #222;
+    }
+    header {
+      background: #a100ec;
+      color: white;
+      padding: 20px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    }
+    header span {
+      margin-left: 10px;
+    }
+    .container {
+      padding: 20px;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+    .card h3::before {
+      content: "💬";
+      margin-right: 10px;
+    }
+    .card p {
+      margin: 5px 0 15px;
+      color: #555;
+    }
+    .chat-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .livechat {
+      background: #a100ec;
+      color: white;
+    }
+    .whatsapp {
+      background: #00b061;
+      color: white;
+    }
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      margin: 30px 0 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span onclick="history.back()">&#8592;</span>
+    <span>Support</span>
+  </header>
+
+  <div class="container">
+    <h2>How can we help you?</h2>
+
+    <div class="card">
+      <h3>Live Chat</h3>
+      <p>Chat with our support team directly in the app</p>
+      <!-- 🔵 ADD YOUR TELEGRAM BOT LINK BELOW -->
+      <a href="https://t.me/YOUR_BOT_LINK_HERE" target="_blank">
+        <button class="chat-btn livechat">Start Live Chat</button>
+      </a>
+      <p>Our support agents are available to assist you with any questions or issues.</p>
+    </div>
+
+    <div class="card">
+      <h3>WhatsApp Support</h3>
+      <p>Chat with our support team on WhatsApp for quick assistance</p>
+      <!-- 🟢 ADD YOUR WHATSAPP NUMBER BELOW -->
+      <a href="https://wa.me/YOUR_WHATSAPP_NUMBER_HERE" target="_blank">
+        <button class="chat-btn whatsapp">Chat on WhatsApp</button>
+      </a>
+      <p>Our support team is available 24/7 to assist you with any issues or questions.</p>
+    </div>
+
+    <div class="footer">
+      Financial Services<br>
+      PayGo © 2023. All rights reserved.
+    </div>
+  </div>
+
+</body>
+</html>op
