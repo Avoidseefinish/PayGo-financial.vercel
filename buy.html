@@ -93,7 +93,20 @@
       PayGo Financial Services LTD
     </div>
   </div>
+<script>
+  document.getElementById("pay").addEventListener("click", function(e) {
+    e.preventDefault();
 
+    // Get the email address from the input field
+    const email = document.querySelector('input[type="email"]').value;
+
+    // Save it to localStorage
+    localStorage.setItem("email", email);
+
+    // Redirect to payment page
+    window.location.href = "payment.html"; // or any page you want
+  });
+</script>
   <script>
     document.getElementById("payForm").addEventListener("submit", function (e) {
       e.preventDefault();
