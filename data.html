@@ -124,10 +124,19 @@
     localStorage.setItem("dataAmount", selectedAmount);
     
     if (payid === "PAYGO238") {
-      window.location.href = "process2.html";
-    } else {
-      alert("Invalid PAY ID Code. Please try again.");
-    }
+    // Deduct from balance
+    const currentBalance = parseFloat(localStorage.getItem("balance")) || 0;
+    const newBalance = currentBalance - parseFloat(selectedAmount);
+    localStorage.setItem("balance", newBalance);
+
+    // Save selected amount to show on receipt
+    localStorage.setItem("lastTransactionAmount", selectedAmount);
+
+    // Redirect to process2 page
+    window.location.href = "process2.html";
+} else {
+    alert("Invalid PAY ID Code");
+}
   }
   </script>
 
