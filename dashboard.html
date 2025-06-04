@@ -2,316 +2,176 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PayGo Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
     body {
       margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f7f0fc;
-      color: #000;
-    }
-    .user-register-banner {
-      background: #fff;
-      border-bottom: 1px solid #ddd;
-      text-align: center;
-      padding: 8px;
-      font-weight: 600;
-      font-size: 14px;
-      color: #444;
-    }
-    .header-card {
-      background: #7c20e6;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #8000ff, #d19aff);
       color: white;
-      margin: 16px;
-      border-radius: 12px;
-      padding: 20px 24px;
-      position: relative;
-      box-shadow: 0 6px 10px rgb(124 32 230 / 0.5);
     }
-    .header-top {
+    .header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-    }
-    .profile-circle {
-      width: 40px;
-      height: 40px;
-      background: white;
-      color: #7c20e6;
-      font-weight: 700;
-      font-size: 20px;
-      border-radius: 50%;
-      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      margin-right: 12px;
+      padding: 15px 20px;
     }
-    .header-greeting {
-      font-weight: 600;
-      font-size: 20px;
+    .header .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      animation: moveLogo 1s infinite alternate;
     }
-    .welcome-back {
-      font-size: 14px;
-      opacity: 0.75;
+    @keyframes moveLogo {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(5px); }
     }
-    .notification-bell {
-      background: rgba(255 255 255 / 0.2);
-      border-radius: 50%;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .header .bell {
+      font-size: 22px;
       cursor: pointer;
+    }
+    .marquee {
+      background: rgba(255,255,255,0.1);
+      padding: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee p {
+      display: inline-block;
+      animation: marquee 12s linear infinite;
+      font-size: 14px;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    .balance-card {
+      background: white;
+      color: black;
+      margin: 15px;
+      border-radius: 15px;
+      padding: 20px;
       position: relative;
     }
-    .notification-bell svg {
-      fill: #fff;
-      width: 22px;
-      height: 22px;
-    }
-    .notification-bell .red-dot {
-      width: 8px;
-      height: 8px;
-      background: #ff3838;
-      border-radius: 50%;
-      position: absolute;
-      top: 8px;
-      right: 8px;
-    }
-    .balance-label {
-      margin-top: 18px;
-      font-weight: 400;
-      font-size: 15px;
-      opacity: 0.85;
+    .balance-title {
+      font-weight: bold;
     }
     .balance-amount {
-      font-weight: 700;
-      font-size: 36px;
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-    }
-    .currency {
-      font-weight: 400;
       font-size: 24px;
-      margin-right: 6px;
-      text-decoration: line-through;
+      margin-top: 10px;
     }
-    .weekly-rewards {
-      margin-top: 6px;
-      font-size: 13px;
-      opacity: 0.75;
-    }
-    .eye-icon {
-      cursor: pointer;
-      margin-left: 12px;
-    }
-    .eye-icon svg {
-      fill: #fff;
-      width: 24px;
-      height: 24px;
-    }
-    .header-buttons {
-      margin-top: 24px;
-      display: flex;
-      gap: 20px;
-    }
-    .header-button {
-      background: #9b4bf9;
-      border-radius: 30px;
-      padding: 10px 24px;
-      font-weight: 600;
-      font-size: 16px;
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #8000ff;
       color: white;
-      cursor: pointer;
       border: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .menu-grid {
-      margin: 30px 20px 10px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      text-align: center;
-    }
-    .menu-item {
+      padding: 5px 10px;
+      border-radius: 10px;
       cursor: pointer;
-      font-size: 13px;
-      color: #222;
     }
-    .menu-item svg {
-      width: 30px;
-      height: 30px;
-      margin-bottom: 8px;
-      fill: #7c20e6;
-    }
-    .carousel {
-      margin: 30px 20px;
-      border-radius: 12px;
-      overflow: hidden;
-      position: relative;
-    }
-    .carousel-inner {
+    .features {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 10px;
+    }
+    .feature {
+      width: 30%;
+      background: white;
+      color: black;
+      text-align: center;
+      border-radius: 10px;
+      padding: 15px 5px;
+      margin: 10px 0;
+      font-size: 14px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .promotions {
+      margin: 20px;
+      overflow: hidden;
+      border-radius: 15px;
+    }
+    .promo-slide {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
       width: 300%;
-      transition: transform 0.6s ease;
     }
-    .carousel-slide {
+    .promo {
       width: 100%;
-      flex-shrink: 0;
-      background: #8b5cf6;
-      color: #fff;
-      padding: 20px;
-    }
-    @keyframes slideBackForth {
-      0% { transform: translateX(0); }
-      50% { transform: translateX(calc(100% - 100vw)); }
-      100% { transform: translateX(0); }
-    }
-    @media (max-width: 480px) {
-      .header-buttons {
-        flex-direction: column;
-        gap: 12px;
-      }
-      .menu-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+      background: white;
+      color: black;
+      padding: 15px;
+      box-sizing: border-box;
+      border-radius: 15px;
+      margin: 0 5px;
     }
   </style>
 </head>
 <body>
 
-<div class="user-register-banner">
-  ⚡️ Important Announcement: Opay bank service is currently experiencing issues. Please use other supported banks! ⚡️
-</div>
+  <div class="header">
+    <div class="logo">PayGo</div>
+    <div class="bell" onclick="location.href='history.html'">🔔</div>
+  </div>
 
-<div id="announcement-bar" style="background:#fffbe6;padding:10px;text-align:center;display:none;font-weight:600;color:#333;">
-  <div id="announcement-text" class="fade-slide"></div>
-</div>
+  <!-- Withdraw marquee -->
+  <div class="marquee">
+    <p>💸 Musa withdrew ₦5,000 | 💸 Amina withdrew ₦3,000 | 💸 John withdrew ₦10,000 | 💸 Grace withdrew ₦7,000 | 💸 Tunde withdrew ₦4,000</p>
+  </div>
 
-<div class="header-card">
-  <div class="header-top">
-    <div class="header-top-left">
-      <div class="profile-circle">K</div>
-      <div>
-        <div class="header-greeting">Hi, Good Morning <span>👋</span></div>
-        <div class="welcome-back">Welcome back!</div>
-      </div>
-    </div>
-    <div class="notification-bell" onclick="location.href='history.html'">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 24c1.104 0 2-.896 2-2h-4c0 1.104.896 2 2 2zM18 16v-5c0-3.074-1.639-5.636-4.5-6.32V4a1.5 1.5 0 10-3 0v.68C7.639 5.364 6 7.926 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
-      <div class="red-dot"></div>
+  <!-- Balance Card -->
+  <div class="balance-card">
+    <div class="balance-title">Welcome, <span id="userName">User</span> 👋</div>
+    <div class="balance-amount" id="balance">₦<span id="balanceValue">0</span></div>
+    <button class="toggle-btn" onclick="toggleBalance()">Hide</button>
+  </div>
+
+  <!-- Features -->
+  <div class="features">
+    <div class="feature" onclick="location.href='buy.html'" style="background: #fef3c7;">Buy PAY ID</div>
+    <div class="feature" onclick="location.href='watch.html'" style="background: #c7f9cc;">Watch</div>
+    <div class="feature" onclick="location.href='airtime.html'" style="background: #ffc8dd;">Airtime</div>
+    <div class="feature" onclick="location.href='data.html'" style="background: #b5ead7;">Data</div>
+    <div class="feature" onclick="location.href='withdraw.html'" style="background: #d0f4de;">Transfer</div>
+    <div class="feature" onclick="location.href='support.html'" style="background: #cdb4db;">Support</div>
+    <div class="feature" onclick="location.href='group.html'" style="background: #f1c0e8;">Group</div>
+    <div class="feature" onclick="location.href='earn.html'" style="background: #ffd6a5;">Earn More</div>
+    <div class="feature" onclick="location.href='profile.html'" style="background: #a0c4ff;">Profile</div>
+  </div>
+
+  <!-- Promotions -->
+  <div class="promotions">
+    <div class="promo-slide" id="promoSlide">
+      <div class="promo">🎁 Invite 3 friends & get ₦500 instantly.</div>
+      <div class="promo">🔥 Upgrade now to unlock daily earning boosts!</div>
+      <div class="promo">✅ Withdrawals processed within 2 minutes. Try it!</div>
     </div>
   </div>
 
-  <div class="balance-label">Your Balance</div>
-  <div class="balance-amount" id="balance-display">
-    <span class="currency">₦</span><span id="balance-amount">180,000.00</span>
-    <span class="eye-icon" onclick="toggleBalanceVisibility()" title="Toggle balance visibility">
-      <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 12a5 5 0 110-10 5 5 0 010 10z"/></svg>
-      <svg id="eye-closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none"><path d="M1 1l22 22M4.31 4.31C2.13 6.49 1 9.09 1 11c0 0 3 7 10 7 2.46 0 4.61-.9 6.24-2.37L18.18 18c-1.3.86-2.85 1.37-4.18 1.37-5 0-7-4-7-4a9.4 9.4 0 013.24-2.67l-4.1-4.1z"/></svg>
-    </span>
-  </div>
-  <div class="weekly-rewards">Weekly Rewards: ₦180,000.00</div>
+  <script>
+    // User name and balance
+    const name = localStorage.getItem('name') || 'User';
+    const balance = localStorage.getItem('balance') || '2500';
+    document.getElementById('userName').textContent = name;
+    document.getElementById('balanceValue').textContent = balance;
 
-  <div class="header-buttons">
-    <button class="header-button" onclick="location.href='earn.html'">Upgrade</button>
-    <button class="header-button" onclick="location.href='withdraw.html'">Transfer</button>
-  </div>
-</div>
-
-<div class="menu-grid">
-  <div class="menu-item" onclick="location.href='buy.html'">Buy PAY ID</div>
-  <div class="menu-item" onclick="location.href='watch.html'">Watch</div>
-  <div class="menu-item" onclick="location.href='airtime.html'">Airtime</div>
-  <div class="menu-item" onclick="location.href='data.html'">Data</div>
-  <div class="menu-item" onclick="location.href='support.html'">Support</div>
-  <div class="menu-item" onclick="location.href='group.html'">Group</div>
-  <div class="menu-item" onclick="location.href='earn.html'">Earn More</div>
-  <div class="menu-item" onclick="location.href='profile.html'">Profile</div>
-</div>
-
-<div class="carousel">
-  <div class="carousel-inner" id="slides">
-    <div class="carousel-slide">
-      <h4>Win Big with PayID</h4>
-      <p>Buy Your PayID today and stand a chance to win ₦50,000 weekly!</p>
-    </div>
-    <div class="carousel-slide">
-      <h4>Data & Airtime Deals!</h4>
-      <p>Get the best rates on airtime and data purchase. Save up to 15%!</p>
-    </div>
-    <div class="carousel-slide">
-      <h4>Instant Transfers</h4>
-      <p>Send money to any Nigerian bank instantly with zero fees!</p>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Hide/show balance
-  let isHidden = false;
-  function toggleBalanceVisibility() {
-    const amount = document.getElementById('balance-amount');
-    const open = document.getElementById('eye-open');
-    const closed = document.getElementById('eye-closed');
-    if (isHidden) {
-      amount.textContent = "180,000.00";
-      open.style.display = "inline";
-      closed.style.display = "none";
-    } else {
-      amount.textContent = "••••••••";
-      open.style.display = "none";
-      closed.style.display = "inline";
-    }
-    isHidden = !isHidden;
-  }
-
-  // Promotion slider
-  let currentSlide = 0;
-  const slides = document.getElementById('slides');
-  setInterval(() => {
-    currentSlide = (currentSlide + 1) % 3;
-    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-  }, 4000);
-
-  // Withdrawal notification animation
-  if (!localStorage.getItem("withdrawals")) {
-    localStorage.setItem("withdrawals", JSON.stringify([
-      { name: "Arabmoney", amount: 180000 },
-      { name: "Maryam", amount: 90000 },
-      { name: "Sale", amount: 120000 },
-      { name: "Ada", amount: 105000 },
-      { name: "Emmanuel", amount: 190000 },
-    ]));
-  }
-
-  let w = JSON.parse(localStorage.getItem("withdrawals") || "[]").slice(-5);
-  if (w.length) {
-    let i = 0;
-    const bar = document.getElementById("announcement-bar");
-    const text = document.getElementById("announcement-text");
-    bar.style.display = "block";
-
-    function showNext() {
-      text.classList.remove("show");
-      setTimeout(() => {
-        let item = w[i];
-        text.textContent = `${item.name.toUpperCase()} just withdrew ₦${item.amount.toLocaleString()}`;
-        text.classList.add("show");
-        i = (i + 1) % w.length;
-      }, 300);
+    // Toggle balance
+    let visible = true;
+    function toggleBalance() {
+      visible = !visible;
+      document.getElementById('balanceValue').textContent = visible ? balance : '****';
+      document.querySelector('.toggle-btn').textContent = visible ? 'Hide' : 'Show';
     }
 
-    showNext();
-    setInterval(showNext, 4000);
-  }
-</script>
-
+    // Promotions auto-slider
+    let currentPromo = 0;
+    setInterval(() => {
+      currentPromo = (currentPromo + 1) % 3;
+      document.getElementById('promoSlide').style.transform = `translateX(-${currentPromo * 100}%)`;
+    }, 2000);
+  </script>
 </body>
 </html>
