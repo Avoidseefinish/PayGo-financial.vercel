@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f8f8f8;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+    }
+
+    .container {
+      padding: 30px 20px;
+    }
+
+    h1 {
+      color: #6a00b8;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .message-box {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin: 0 auto 30px;
+      max-width: 90%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      font-size: 15px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #a500ff;
+      font-weight: bold;
+    }
+
+    .cta-button {
+      background: linear-gradient(to right, #a500ff, #ff5722);
+      color: white;
+      padding: 14px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 28px;
+      cursor: pointer;
+      width: 90%;
+      max-width: 320px;
+      margin: 10px auto;
+      display: block;
+    }
+
+    .whatsapp-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      width: 55px;
+      height: 55px;
+      font-size: 28px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    img.logo {
+      width: 200px;
+      margin: 40px auto 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGO (optional image placeholder) -->
+  <img src="your-logo-here.png" alt="PayGo" class="logo" />
+
+  <!-- Container -->
+  <div class="container">
+    <h1>Welcome to PayGo!</h1>
+
+    <div class="message-box">
+      As a new user, you'll receive a generous welcome bonus of
+      <span class="highlight">₦180,000</span>, which can be withdrawn at any time.
+      Yes, you read that right – it's yours to keep!
+    </div>
+
+    <button class="cta-button" onclick="window.location.href='next1.html'">
+      Continue to Dashboard
+    </button>
+  </div>
+
+  <!-- WhatsApp Chat Button -->
+  <a class="whatsapp-button" href="https://wa.me/YOUR_WHATSAPP_NUMBER" target="_blank">💬</a>
+
+</body>
+</html>
