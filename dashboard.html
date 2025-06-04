@@ -8,235 +8,195 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #1d0032, #2c004f);
-      color: #fff;
+      background-color: #F5E6FC;
     }
 
     .header {
-      background: #5a00a0;
+      background-color: #A626D3;
       color: white;
-      padding: 15px;
+      padding: 10px;
       text-align: center;
-      position: relative;
-    }
-
-    .paygo-logo {
-      font-size: 24px;
-      font-weight: bold;
-      animation: bounce 1s infinite alternate;
-    }
-
-    @keyframes bounce {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-3px); }
-    }
-
-    .user-box {
-      background: #3a005e;
-      margin: 15px;
-      border-radius: 15px;
-      padding: 20px;
-      color: white;
-      position: relative;
-    }
-
-    .user-name {
       font-size: 20px;
-      margin-bottom: 5px;
+      animation: pulse 1s infinite alternate;
     }
 
-    .balance-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 5px;
+    @keyframes pulse {
+      from { letter-spacing: 0px; }
+      to { letter-spacing: 2px; }
     }
 
-    .balance {
-      font-size: 32px;
-      font-weight: bold;
-    }
-
-    .eye-icon {
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
+    .balance-card {
+      background-color: #A626D3;
+      color: white;
+      margin: 20px;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: relative;
     }
 
     .bell {
       position: absolute;
-      right: 15px;
-      top: 15px;
+      top: 20px;
+      right: 20px;
       cursor: pointer;
+    }
+
+    .balance {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 10px 0;
     }
 
     .buttons {
       display: flex;
-      justify-content: space-around;
-      margin: 20px 15px;
+      justify-content: space-between;
+      margin-top: 20px;
     }
 
     .buttons button {
-      background: #ffce00;
+      background-color: white;
+      color: #A626D3;
       border: none;
+      border-radius: 20px;
       padding: 10px 20px;
-      border-radius: 10px;
       font-weight: bold;
-      color: #000;
       cursor: pointer;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 20px;
+    }
+
+    .feature {
       text-align: center;
-      gap: 10px;
-      padding: 0 15px;
+      margin: 15px;
     }
 
-    .grid div {
-      background: #4f0077;
-      padding: 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      cursor: pointer;
-      color: white;
-    }
-
-    .grid img {
-      width: 30px;
-      height: 30px;
-      margin-bottom: 5px;
+    .feature img {
+      width: 40px;
+      height: 40px;
     }
 
     .promotions {
-      margin: 20px 15px;
+      margin: 20px;
     }
 
-    .promo-banner {
-      background: #5e0096;
+    .promo {
+      background-color: #A626D3;
       color: white;
-      border-radius: 10px;
+      border-radius: 20px;
       padding: 20px;
-      min-height: 100px;
-      text-align: center;
-      font-size: 14px;
-      display: none;
+      font-weight: bold;
+      animation: slide 6s infinite;
+      min-height: 120px;
     }
 
-    .promo-banner.active {
-      display: block;
+    @keyframes slide {
+      0%, 20% { transform: translateX(0%); opacity: 1; }
+      40%, 60% { transform: translateX(-100%); opacity: 0; }
+      80%, 100% { transform: translateX(0%); opacity: 1; }
+    }
+
+    .toggle-visibility {
+      position: absolute;
+      right: 60px;
+      top: 85px;
+      cursor: pointer;
     }
   </style>
 </head>
-<body onload="loadUser()">
+<body>
+  <div class="header">PayGo</div>
 
-  <div class="header">
-    <span class="paygo-logo">PayGo</span>
-    <img src="https://img.icons8.com/fluency/48/appointment-reminders.png" class="bell" onclick="goToHistory()" width="24"/>
+  <div class="balance-card">
+    <div class="bell" onclick="location.href='history.html'">🔔</div>
+    <div id="username">Hi, User 👋</div>
+    <small>Welcome back!</small>
+
+    <div class="balance">
+      <span id="balanceText">₦<span id="balance">0.00</span></span>
+      <span class="toggle-visibility" onclick="toggleBalance()">👁️</span>
+    </div>
+    <div>Weekly Rewards: ₦180,000.00</div>
+
+    <div class="buttons">
+      <button onclick="location.href='earn.html'">Upgrade</button>
+      <button onclick="location.href='withdraw.html'">Transfer</button>
+    </div>
   </div>
 
-  <div class="user-box">
-    <div class="user-name">Hi, <span id="username">User</span> 👋</div>
-    <div>Your Balance</div>
-    <div class="balance-row">
-      <div class="balance" id="balance">₦0.00</div>
-      <img src="https://img.icons8.com/ios-filled/50/ffffff/visible.png" class="eye-icon" id="toggleEye" onclick="toggleBalance()" />
+  <div class="features">
+    <div class="feature" onclick="location.href='buy.html'">
+      <img src="https://img.icons8.com/external-flat-icons-inmotus-design/67/null/external-payment-money-flat-icons-inmotus-design.png"/>
+      <div>Buy PAY ID</div>
     </div>
-    <div>Weekly Rewards: ₦0.00</div>
-  </div>
-
-  <div class="buttons">
-    <button onclick="location.href='earn.html'">Upgrade</button>
-    <button onclick="location.href='withdraw.html'">Transfer</button>
-  </div>
-
-  <div class="grid">
-    <div onclick="location.href='buy.html'">
-      <img src="https://img.icons8.com/fluency/48/wallet.png"/><br>Buy PAY ID
+    <div class="feature" onclick="location.href='watch.html'">
+      <img src="https://img.icons8.com/3d-fluency/94/tv.png"/>
+      <div>Watch</div>
     </div>
-    <div onclick="location.href='watch.html'">
-      <img src="https://img.icons8.com/fluency/48/tv.png"/><br>Watch
+    <div class="feature" onclick="location.href='airtime.html'">
+      <img src="https://img.icons8.com/3d-fluency/94/cell-phone.png"/>
+      <div>Airtime</div>
     </div>
-    <div onclick="location.href='airtime.html'">
-      <img src="https://img.icons8.com/fluency/48/cell-phone.png"/><br>Airtime
+    <div class="feature" onclick="location.href='data.html'">
+      <img src="https://img.icons8.com/3d-fluency/94/database.png"/>
+      <div>Data</div>
     </div>
-    <div onclick="location.href='data.html'">
-      <img src="https://img.icons8.com/fluency/48/data-in-both-directions.png"/><br>Data
+    <div class="feature" onclick="location.href='support.html'">
+      <img src="https://img.icons8.com/3d-fluency/94/headphones.png"/>
+      <div>Support</div>
     </div>
-    <div onclick="location.href='support.html'">
-      <img src="https://img.icons8.com/fluency/48/headphones.png"/><br>Support
+    <div class="feature" onclick="location.href='group.html'">
+      <img src="https://img.icons8.com/3d-fluency/94/network.png"/>
+      <div>Group</div>
     </div>
-    <div onclick="location.href='group.html'">
-      <img src="https://img.icons8.com/fluency/48/groups.png"/><br>Group
+    <div class="feature" onclick="location.href='earn.html'">
+      <img src="https://img.icons8.com/3d-fluency/94/money-bag.png"/>
+      <div>Earn More</div>
     </div>
-    <div onclick="location.href='earn.html'">
-      <img src="https://img.icons8.com/fluency/48/money-bag.png"/><br>Earn More
-    </div>
-    <div onclick="location.href='profile.html'">
-      <img src="https://img.icons8.com/fluency/48/user.png"/><br>Profile
+    <div class="feature" onclick="location.href='profile.html'">
+      <img src="https://img.icons8.com/3d-fluency/94/user.png"/>
+      <div>Profile</div>
     </div>
   </div>
 
   <div class="promotions">
-    <div class="promo-banner active">
-      <strong>🎯 AUGUST 27–28</strong><br>PAYGO Mobile Money Tickets – Airtel, MTN, Zamtel
-    </div>
-    <div class="promo-banner">
-      <strong>🎁 Transact & Win</strong><br>Locations: Cheers Gold Crest Mall, ChrisMar Hotel, Hot Spot Pub & Grill
-    </div>
-    <div class="promo-banner">
-      <strong>🏆 Winners of K20 Airtime</strong><br>Patience Ng’andwe, Phiri John
-    </div>
+    <div class="promo" id="promoText">🏀 August 27-28 - Mobile Money Game! Use PayGo & Win Big!</div>
   </div>
 
   <script>
-    let showBalance = true;
-
-    function loadUser() {
-      let user = localStorage.getItem("paygoUser") || "User";
-      let balance = parseFloat(localStorage.getItem("paygoBalance") || "180000");
-      document.getElementById("username").innerText = user;
-      updateBalanceText(balance);
-    }
-
-    function updateBalance(amount) {
-      let balance = parseFloat(localStorage.getItem("paygoBalance") || "180000");
-      balance -= amount;
-      localStorage.setItem("paygoBalance", balance);
-      updateBalanceText(balance);
-    }
-
-    function updateBalanceText(balance) {
-      let balanceElem = document.getElementById("balance");
-      if (showBalance) {
-        balanceElem.innerText = "₦" + balance.toLocaleString(undefined, {minimumFractionDigits: 2});
-      } else {
-        balanceElem.innerText = "₦••••••";
-      }
-    }
+    const user = localStorage.getItem("username") || "User";
+    document.getElementById("username").innerText = `Hi, ${user} 👋`;
 
     function toggleBalance() {
-      showBalance = !showBalance;
-      let icon = document.getElementById("toggleEye");
-      let balance = parseFloat(localStorage.getItem("paygoBalance") || "180000");
-      updateBalanceText(balance);
-      icon.src = showBalance
-        ? "https://img.icons8.com/ios-filled/50/ffffff/visible.png"
-        : "https://img.icons8.com/ios-filled/50/ffffff/invisible.png";
+      const bal = document.getElementById("balanceText");
+      bal.style.display = bal.style.display === "none" ? "inline" : "none";
     }
 
-    function goToHistory() {
-      window.location.href = "history.html";
+    // Balance storage
+    let balance = parseFloat(localStorage.getItem("balance") || "180000");
+    document.getElementById("balance").innerText = balance.toLocaleString("en-NG", { minimumFractionDigits: 2 });
+
+    // Auto-update after deductions
+    function updateBalance(newBalance) {
+      localStorage.setItem("balance", newBalance);
+      document.getElementById("balance").innerText = newBalance.toLocaleString("en-NG", { minimumFractionDigits: 2 });
     }
 
-    // Promotion slider
-    let current = 0;
+    // Sample promotion rotation
+    const promos = [
+      "🏀 August 27-28 - Mobile Money Game! Use PayGo & Win Big!",
+      "🎉 Transact at Cheers Mall, Chrismar Hotel, Hot Spot for prizes!",
+      "📞 K20 Airtime Winners: Patience Ng'andwe, Phiri John!"
+    ];
+    let promoIndex = 0;
     setInterval(() => {
-      const banners = document.querySelectorAll(".promo-banner");
-      banners.forEach(b => b.classList.remove("active"));
-      current = (current + 1) % banners.length;
-      banners[current].classList.add("active");
+      promoIndex = (promoIndex + 1) % promos.length;
+      document.getElementById("promoText").innerText = promos[promoIndex];
     }, 2000);
   </script>
 </body>
