@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Transfer To Bank</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff;
+    }
+
+    header {
+      background-color: #a100ec;
+      color: white;
+      padding: 15px 20px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    }
+
+    header span {
+      margin-left: 10px;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .payid-link {
+      color: #a100ec;
+      text-decoration: none;
+      font-size: 14px;
+      margin-top: -10px;
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .balance {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #a100ec;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span onclick="history.back()">&#8592;</span>
+    <span>Transfer To Bank</span>
+  </header>
+
+  <div class="container">
+    <h2>Bank Details</h2>
+
+    <div class="error" id="errorMsg"></div>
+
+    <input type="text" id="accountName" placeholder="Account Name" />
+    <input type="text" id="accountNumber" placeholder="Account Number (10 digits)" maxlength="10" />
+
+    <select id="bankSelect">
+      <option value="">Select Bank</option>
+      <!-- 120 Nigerian Banks -->
+      <option>Access Bank</option>
+      <option>GTBank</option>
+      <option>First Bank</option>
+      <option>UBA</option>
+      <option>Zenith Bank</option>
+      <option>Fidelity Bank</option>
+      <option>Ecobank</option>
+      <option>Wema Bank</option>
+      <option>Union Bank</option>
+      <option>Polaris Bank</option>
+      <option>Keystone Bank</option>
+      <option>Jaiz Bank</option>
+      <option>Stanbic IBTC</option>
+      <option>Sterling Bank</option>
+      <option>Unity Bank</option>
+      <option>Heritage Bank</option>
+      <option>Titan Trust Bank</option>
+      <option>Providus Bank</option>
+      <option>SunTrust Bank</option>
+      <option>Globus Bank</option>
+      <option>Optimus Bank</option>
+      <option>PremiumTrust Bank</option>
+      <option>Parallex Bank</option>
+      <option>Rubies Bank</option>
+      <option>Kuda Microfinance Bank</option>
+      <option>Opay</option>
+      <option>Palmpay</option>
+      <option>Moniepoint</option>
+      <option>Carbon Bank</option>
+      <option>FairMoney</option>
+      <option>Vbank</option>
+      <option>ALAT by Wema</option>
+      <option>ChipperCash</option>
+      <option>9PSB</option>
+      <option>Dot Bank</option>
+      <option>Eyowo</option>
+      <option>Mint Bank</option>
+      <option>One Finance</option>
+      <option>Paycom</option>
+      <option>Paystack</option>
+      <option>Remita</option>
+      <option>TeamApt</option>
+      <option>Trustfund MFB</option>
+      <option>Verve</option>
+      <option>Yello Digital Financial Services</option>
+      <option>ZenithDirect</option>
+      <!-- Add more banks if needed -->
+    </select>
+
+    <input type="number" id="amount" placeholder="Amount" />
+    <input type="text" id="payid" placeholder="PAY ID CODE (Buy PAY ID)" />
+
+    <a class="payid-link" href="buy.html">Buy PAY ID code</a>
+
+    <div class="balance">Available Balance: ₦180,000.00</div>
+
+    <button onclick="submitTransfer()">Submit</button>
+  </div>
+
+  <script>
+    function submitTransfer() {
+      const accountName = document.getElementById("accountName").value.trim();
+      const accountNumber = document.getElementById("accountNumber").value.trim();
+      const bank = document.getElementById("bankSelect").value;
+      const amount = document.getElementById("amount").value.trim();
+      const payid = document.getElementById("payid").value.trim();
+      const errorMsg = document.getElementById("errorMsg");
+
+      if (!accountName || !accountNumber || !bank || !amount || !payid) {
+        errorMsg.textContent = "All fields are required.";
+        return;
+      }
+
+      if (accountNumber.length !== 10 || isNaN(accountNumber)) {
+        errorMsg.textContent = "Enter a valid 10-digit account number.";
+        return;
+      }
+
+      if (payid !== "PAYGO238") {
+        errorMsg.textContent = "Invalid PAY ID Code.";
+        return;
+      }
+
+      errorMsg.textContent = "";
+      window.location.href = "loading1.html";
+    }
+  </script>
+
+</body>
+</html>
