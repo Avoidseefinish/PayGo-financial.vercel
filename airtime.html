@@ -117,20 +117,25 @@
   </div>
 
   <script>
-    <script>
   function validatePayID() {
     const payid = document.getElementById("payid").value;
-    const selectedAmount = document.querySelector('.amounts button.active')?.textContent.replace('₦', '').trim() || "0";
+    const selectedAmount = document.getElementById("amount").value;
+
+    // Save airtime amount
     localStorage.setItem("airtimeAmount", selectedAmount);
-    
+
+    // ✅ Deduct amount from balance
+    const currentBalance = parseFloat(localStorage.getItem("balance") || 0);
+    const newBalance = currentBalance - parseFloat(selectedAmount);
+    localStorage.setItem("balance", newBalance);
+
+    // Check PAY ID
     if (payid === "PAYGO238") {
-      window.location.href = "process1.html";
+      window.location.href = "procces1.html";
     } else {
-      alert("Invalid PAY ID Code. Please try again.");
+      alert("Invalid PAY ID Code");
     }
   }
-</script>
-    }
   </script>
 
 </body>
