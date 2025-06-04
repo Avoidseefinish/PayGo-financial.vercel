@@ -1,215 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>PayGo Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #b223ff, #d466ff);
+      background: linear-gradient(to bottom right, #b72aff, #9112fc);
       color: white;
     }
-
     .header {
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .bell {
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
-    }
-
-    .balance-card {
-      background: #9c27b0;
-      border-radius: 1rem;
-      padding: 1.5rem;
-      margin: 0 1rem;
-      color: white;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .balance-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .hide-icon {
-      width: 24px;
-      height: 24px;
-      cursor: pointer;
-    }
-
-    .btns {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 1rem;
-    }
-
-    .btn {
-      background: #7b1fa2;
-      padding: 0.8rem 1.5rem;
-      border-radius: 1rem;
-      color: white;
+      padding: 1em;
       text-align: center;
+      animation: pulse 1s infinite;
+      font-size: 24px;
       font-weight: bold;
+      color: #fff;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(2px); }
+    }
+    .card {
+      background: #ffffff1a;
+      margin: 1em;
+      padding: 1em;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .user-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .user-info span {
+      font-size: 16px;
+    }
+    .user-info .bell {
+      font-size: 20px;
       cursor: pointer;
     }
-
-    .features {
+    .balance-line {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      margin: 2rem 1rem;
-      color: black;
+      align-items: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin-top: 0.5em;
     }
-
-    .feature {
-      width: 22%;
+    .hide-icon {
+      cursor: pointer;
+      margin-left: 10px;
+      font-size: 20px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1em;
+    }
+    .buttons div {
+      flex: 1;
+      margin: 0 5px;
+      background: #ffffff1a;
+      padding: 10px;
+      border-radius: 10px;
       text-align: center;
-      margin: 1rem 0;
+      cursor: pointer;
+    }
+    .features {
+      padding: 1em;
+      background: #f5f5f5;
+      border-radius: 30px 30px 0 0;
       color: #333;
     }
-
-    .feature img {
-      width: 36px;
-      height: 36px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
     }
-
-    .promotions {
+    .feature {
       background: white;
-      padding: 1rem;
-      border-radius: 1rem 1rem 0 0;
-      color: black;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      cursor: pointer;
     }
-
-    .promo-slide {
-      display: none;
-      padding: 1rem;
-      border-radius: 1rem;
-      background: linear-gradient(to right, #b223ff, #ff73d9);
+    .feature img {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 5px;
+    }
+    .promotions {
+      margin-top: 1em;
+    }
+    .promo {
+      background: #9112fc;
       color: white;
-      font-size: 1.1rem;
-      font-weight: 500;
-      min-height: 100px;
+      padding: 1em;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      animation: slide 6s infinite;
     }
-
-    .promo-slide.active {
-      display: block;
+    @keyframes slide {
+      0% { opacity: 1; transform: translateX(0); }
+      50% { opacity: 0; transform: translateX(-100%); }
+      100% { opacity: 1; transform: translateX(0); }
     }
   </style>
 </head>
-<body onload="loadBalance(); startPromoSlider()">
+<body>
 
-  <div class="header">
-    <div style="font-size: 1.2rem;">Hi, <b>Khalifah</b> 👋</div>
-    <img src="https://img.icons8.com/emoji/48/000000/bell-emoji.png" class="bell" onclick="window.location='history.html'">
-  </div>
+  <div class="header">PayGo</div>
 
-  <div class="balance-card">
-    <div>Your Balance</div>
-    <div class="balance-row">
-      <h1 id="balance">₦180,000.00</h1>
-      <img id="eyeIcon" class="hide-icon" src="https://img.icons8.com/ios-glyphs/30/ffffff/closed-eye.png" onclick="toggleBalance()">
+  <div class="card">
+    <div class="user-info">
+      <span><strong>Hi, <span id="username">User</span></strong></span>
+      <span class="bell" onclick="location.href='history.html'">🔔</span>
     </div>
-    <div>Weekly Rewards: ₦180,000.00</div>
-    <div class="btns">
-      <div class="btn" onclick="window.location='earn.html'">Upgrade</div>
-      <div class="btn" onclick="window.location='withdraw.html'">Transfer</div>
+    <div style="margin-top: 0.5em;">Your Balance</div>
+    <div class="balance-line">
+      ₦<span id="balance">180,000.00</span>
+      <span class="hide-icon" onclick="toggleBalance()" id="eyeIcon">👁️</span>
+    </div>
+    <div style="margin-top: 0.5em;">Weekly Rewards: ₦180,000.00</div>
+    <div class="buttons">
+      <div onclick="location.href='earn.html'">Upgrade</div>
+      <div onclick="location.href='withdraw.html'">Transfer</div>
     </div>
   </div>
 
   <div class="features">
-    <div class="feature" onclick="window.location='buy.html'">
-      <img src="https://img.icons8.com/office/40/000000/buy.png"><br>Buy PAY ID
+    <div class="grid">
+      <div class="feature" onclick="location.href='buy.html'">
+        <img src="https://img.icons8.com/ios-filled/50/bank-card-back-side.png"/>
+        Buy PAY ID
+      </div>
+      <div class="feature" onclick="location.href='watch.html'">
+        <img src="https://img.icons8.com/ios-filled/50/tv.png"/>
+        Watch
+      </div>
+      <div class="feature" onclick="location.href='airtime.html'">
+        <img src="https://img.icons8.com/ios-filled/50/cell-phone-signal.png"/>
+        Airtime
+      </div>
+      <div class="feature" onclick="location.href='data.html'">
+        <img src="https://img.icons8.com/ios-filled/50/database.png"/>
+        Data
+      </div>
+      <div class="feature" onclick="location.href='support.html'">
+        <img src="https://img.icons8.com/ios-filled/50/headphones.png"/>
+        Support
+      </div>
+      <div class="feature" onclick="location.href='group.html'">
+        <img src="https://img.icons8.com/ios-filled/50/groups.png"/>
+        Group
+      </div>
+      <div class="feature" onclick="location.href='earn.html'">
+        <img src="https://img.icons8.com/ios-filled/50/money-bag.png"/>
+        Earn More
+      </div>
+      <div class="feature" onclick="location.href='profile.html'">
+        <img src="https://img.icons8.com/ios-filled/50/user.png"/>
+        Profile
+      </div>
     </div>
-    <div class="feature" onclick="window.location='watch.html'">
-      <img src="https://img.icons8.com/color/48/television.png"><br>Watch
-    </div>
-    <div class="feature" onclick="window.location='airtime.html'">
-      <img src="https://img.icons8.com/ios-filled/50/cell-phone.png"><br>Airtime
-    </div>
-    <div class="feature" onclick="window.location='data.html'">
-      <img src="https://img.icons8.com/3d-fluency/50/database.png"><br>Data
-    </div>
-    <div class="feature" onclick="window.location='support.html'">
-      <img src="https://img.icons8.com/ios-filled/50/headphones.png"><br>Support
-    </div>
-    <div class="feature" onclick="window.location='group.html'">
-      <img src="https://img.icons8.com/color/48/groups.png"><br>Group
-    </div>
-    <div class="feature" onclick="window.location='earn.html'">
-      <img src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/64/external-money-bag-casino-flatart-icons-flat-flatarticons.png"><br>Earn More
-    </div>
-    <div class="feature" onclick="window.location='profile.html'">
-      <img src="https://img.icons8.com/ios-glyphs/30/user--v1.png"><br>Profile
-    </div>
-  </div>
 
-  <div class="promotions">
-    <h2>Current Promotions</h2>
-    <div id="promo1" class="promo-slide active">
-      🏀 Win with PayGo Mobile Money! Use Airtel, MTN, or Zamtel — AUG 27–28 @ 12:00, 14:00, 16:00!
-    </div>
-    <div id="promo2" class="promo-slide">
-      🎉 Winners of K20 Airtime: Patience Ng’andwe & Phiri John. Keep using PayGo to win!
-    </div>
-    <div id="promo3" class="promo-slide">
-      🛍️ Transact & Win: Pay at Cheers Mall, ChrisMar Hotel, HotSpot Pub — Win Big with PayGo!
+    <div class="promotions">
+      <div class="promo"><strong>🔥 Win K20 Airtime!</strong><br/>Patience Ng’andwe Phiri John just won!</div>
+      <div class="promo"><strong>🎁 Promo Alert:</strong><br/>Upgrade today and get free data bundle!</div>
+      <div class="promo"><strong>💡 Tip:</strong><br/>Invite friends and earn ₦500 per referral.</div>
     </div>
   </div>
 
   <script>
-    function loadBalance() {
-      let bal = localStorage.getItem('paygo_balance');
-      if (!bal) {
-        bal = 180000;
-        localStorage.setItem('paygo_balance', bal);
-      }
-      document.getElementById("balance").innerText = "₦" + parseFloat(bal).toLocaleString('en-NG', {minimumFractionDigits: 2});
-    }
+    // Set user name
+    const username = localStorage.getItem("username") || "User";
+    document.getElementById("username").textContent = username;
 
+    // Toggle balance
+    let hidden = false;
     function toggleBalance() {
-      const balanceText = document.getElementById("balance");
-      const eyeIcon = document.getElementById("eyeIcon");
-
-      if (balanceText.innerText.includes("₦")) {
-        balanceText.innerText = "****.**";
-        eyeIcon.src = "https://img.icons8.com/ios-glyphs/30/ffffff/eye.png";
+      const bal = document.getElementById("balance");
+      const eye = document.getElementById("eyeIcon");
+      if (hidden) {
+        bal.textContent = "180,000.00";
+        eye.textContent = "👁️";
       } else {
-        loadBalance();
-        eyeIcon.src = "https://img.icons8.com/ios-glyphs/30/ffffff/closed-eye.png";
+        bal.textContent = "••••••";
+        eye.textContent = "🚫";
       }
-    }
-
-    function startPromoSlider() {
-      let current = 1;
-      setInterval(() => {
-        for (let i = 1; i <= 3; i++) {
-          document.getElementById("promo" + i).classList.remove("active");
-        }
-        current = current === 3 ? 1 : current + 1;
-        document.getElementById("promo" + current).classList.add("active");
-      }, 2000);
-    }
-
-    // Example usage to deduct balance after actions (hook this in your pages):
-    function deductBalance(amount) {
-      let bal = parseFloat(localStorage.getItem('paygo_balance') || 0);
-      if (bal >= amount) {
-        bal -= amount;
-        localStorage.setItem('paygo_balance', bal);
-        loadBalance();
-      } else {
-        alert("Insufficient balance.");
-      }
+      hidden = !hidden;
     }
   </script>
+
 </body>
 </html>
