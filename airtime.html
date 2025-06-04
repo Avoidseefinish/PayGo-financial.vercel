@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buy Airtime</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fafafa;
+    }
+    header {
+      background: #a100ec;
+      color: white;
+      padding: 20px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+    }
+    header span {
+      margin-left: 10px;
+    }
+    .promo {
+      background: #a100ec;
+      color: #fff;
+      padding: 10px 15px;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .promo b {
+      color: gold;
+    }
+    .promo button {
+      background: gold;
+      border: none;
+      border-radius: 15px;
+      padding: 5px 15px;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+    }
+    .networks, .amounts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .networks button, .amounts button {
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 16px;
+      background: white;
+      cursor: pointer;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    .submit-btn {
+      background: #d8aaff;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span onclick="history.back()">&#8592;</span>
+    <span>Airtime</span>
+  </header>
+
+  <div class="promo">
+    <div>Enjoy <b>Airtime Bonuses!</b></div>
+    <button>GO</button>
+  </div>
+
+  <div class="container">
+    <div class="networks">
+      <button>Airtel</button>
+      <button>MTN</button>
+      <button>Glo</button>
+      <button>9mobile</button>
+    </div>
+
+    <input type="text" id="phone" placeholder="Enter mobile number"/>
+
+    <div><strong>Select Amount</strong></div>
+    <div class="amounts">
+      <button>₦50<br/><small>₦1 Cashback</small></button>
+      <button>₦100<br/><small>₦2 Cashback</small></button>
+      <button>₦200<br/><small>₦3 Cashback</small></button>
+      <button>₦500<br/><small>₦10 Cashback</small></button>
+      <button>₦1000<br/><small>₦20 Cashback</small></button>
+      <button>₦2000<br/><small>₦50 Cashback</small></button>
+      <button>₦3000<br/><small>₦75 Cashback</small></button>
+      <button>₦5000<br/><small>₦125 Cashback</small></button>
+      <button>₦10000<br/><small>₦250 Cashback</small></button>
+    </div>
+
+    <input type="text" id="payid" placeholder="Enter PAY ID Code"/>
+    <button class="submit-btn" onclick="validatePayID()">Buy Airtime</button>
+  </div>
+
+  <script>
+    function validatePayID() {
+      const payid = document.getElementById("payid").value.trim();
+      if (payid === "PAYGO238") {
+        window.location.href = "process1.html";
+      } else {
+        alert("Invalid PAY ID Code. Please enter the correct code.");
+      }
+    }
+  </script>
+
+</body>
+</html>
