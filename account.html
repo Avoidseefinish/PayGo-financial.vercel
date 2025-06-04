@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bank Transfer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto;
+      background-color: #fff;
+      color: #333;
+    }
+
+    .header {
+      background-color: #2E0066;
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .sub-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f2f2f7;
+      padding: 10px 15px;
+      font-size: 16px;
+    }
+
+    .sub-header .cancel {
+      color: red;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .container {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .amount {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .email {
+      font-size: 15px;
+      color: #555;
+    }
+
+    .instruction {
+      margin: 15px 0;
+      font-weight: 500;
+    }
+
+    .info-box {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: left;
+      margin: 20px auto;
+      width: 90%;
+    }
+
+    .info-box div {
+      margin-bottom: 15px;
+    }
+
+    .label {
+      font-size: 14px;
+      color: #777;
+    }
+
+    .value {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .copy-btn {
+      float: right;
+      background: orange;
+      border: none;
+      padding: 5px 10px;
+      color: white;
+      font-size: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .notice {
+      font-size: 14px;
+      color: #444;
+      margin: 20px 0;
+    }
+
+    .btn {
+      background-color: orange;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      padding: 15px;
+      border-radius: 5px;
+      width: 90%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">Bank Transfer</div>
+  <div class="sub-header">
+    <div><span id="amt-display">NGN 7,250</span></div>
+    <div class="cancel" onclick="window.location.href='cancel.html'">Cancel</div>
+  </div>
+
+  <div class="container">
+    <div class="amount">NGN 7,250</div>
+    <div class="email" id="user-email">you@example.com</div>
+
+    <p class="instruction">Complete this bank transfer to proceed</p>
+
+    <div class="info-box">
+      <div>
+        <div class="label">💵 Amount</div>
+        <div class="value">NGN 7,250
+          <button class="copy-btn" onclick="copyText('7250')">Copy</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">🔢 Account Number</div>
+        <div class="value">7742539748
+          <button class="copy-btn" onclick="copyText('7742539748')">Copy</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">🏦 Bank Name</div>
+        <div class="value">Carbon</div>
+      </div>
+
+      <div>
+        <div class="label">🆔 Account Name</div>
+        <div class="value">PayGo–Ebuka Nwite</div>
+      </div>
+    </div>
+
+    <p class="notice">
+      Kindly proceed with the payment for your PAY ID.<br>
+      Complete the bank transfer to activate your PAY ID.
+    </p>
+
+    <button class="btn" onclick="goToCancel()">I have made this bank Transfer</button>
+  </div>
+
+  <script>
+    // Show user's email from localStorage
+    document.getElementById('user-email').textContent = localStorage.getItem("email") || "your@email.com";
+
+    // Copy button
+    function copyText(text) {
+      navigator.clipboard.writeText(text);
+      alert("Copied: " + text);
+    }
+
+    // Redirect after confirmation
+    function goToCancel() {
+      window.location.href = "cancel.html";
+    }
+  </script>
+
+</body>
+</html>
