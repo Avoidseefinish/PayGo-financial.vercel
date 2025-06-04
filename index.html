@@ -1,1 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register to continue</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f8f8;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
 
+    .bonus-banner {
+      background: #a500ff;
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      padding: 12px 20px;
+      border-radius: 20px;
+      width: fit-content;
+      margin: 70px auto 20px;
+      animation: blink 1s infinite alternate;
+      line-height: 1.4;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0.7; transform: scale(1.05); }
+    }
+
+    .help-link {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: #a500ff;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .container {
+      margin-top: 20px;
+      padding: 20px;
+    }
+
+    h2 {
+      margin: 10px 0 30px;
+      color: #111;
+    }
+
+    input {
+      width: 90%;
+      max-width: 300px;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      width: 90%;
+      max-width: 300px;
+      padding: 12px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .toggle-link {
+      margin-top: 15px;
+      color: #a500ff;
+      cursor: pointer;
+    }
+
+    .chat-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      font-size: 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Right Help -->
+  <a href="https://t.me/YOUR_TELEGRAM_BOT" class="help-link">Need Help?</a>
+
+  <!-- Animated Bonus Banner -->
+  <div class="bonus-banner">
+    🎁 Welcome Bonus!<br>Register now and get 180k instantly
+  </div>
+
+  <!-- Main Form Container -->
+  <div class="container">
+    <h2 id="formTitle">Register to continue</h2>
+
+    <div id="nameField">
+      <input type="text" placeholder="Enter Name" id="name"><br>
+    </div>
+
+    <input type="email" placeholder="Enter Email" id="email"><br>
+    <input type="password" placeholder="Enter Password" id="password"><br>
+    <button onclick="submitForm()" id="submitBtn">Register</button>
+
+    <div class="toggle-link" onclick="toggleForm()">Already have an account? Login</div>
+  </div>
+
+  <!-- WhatsApp Chat Button -->
+  <a class="chat-button" href="https://wa.me/YOUR_WHATSAPP_NUMBER" target="_blank">💬</a>
+
+  <script>
+    let isLogin = false;
+
+    function toggleForm() {
+      isLogin = !isLogin;
+      document.getElementById("formTitle").innerText = isLogin ? "Login to your account" : "Register to continue";
+      document.getElementById("submitBtn").innerText = isLogin ? "Login" : "Register";
+      document.getElementById("nameField").style.display = isLogin ? "none" : "block";
+      document.querySelector(".toggle-link").innerHTML = isLogin ? "Don't have an account? Register" : "Already have an account? Login";
+    }
+
+    function submitForm() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!email || !password || (!isLogin && !name)) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      if (isLogin) {
+        const userData = JSON.parse(localStorage.getItem("user_" + email));
+        if (userData && userData.password === password) {
+          localStorage.setItem("currentUser", JSON.stringify(userData));
+          window.location.href = "welcome.html";
+        } else {
+          alert("Invalid email or password.");
+        }
+      } else {
+        if (localStorage.getItem("user_" + email)) {
+          alert("This email is already registered. Please login.");
+        } else {
+          const newUser = { name, email, password };
+          localStorage.setItem("user_" + email, JSON.stringify(newUser));
+          localStorage.setItem("currentUser", JSON.stringify(newUser));
+          window.location.href = "welcome.html";
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
