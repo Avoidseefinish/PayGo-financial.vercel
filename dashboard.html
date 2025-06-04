@@ -3,199 +3,217 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PayGo Dashboard</title>
+  <title>Dashboard</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #a100ff, #d200ff);
-      color: white;
+      background: linear-gradient(to bottom, #8a00ff, #c87eff);
+      color: #fff;
       overflow-x: hidden;
     }
-    .header {
-      text-align: center;
-      padding: 20px 0;
-      font-size: 26px;
+
+    .top-banner {
+      background: white;
+      color: red;
       font-weight: bold;
-      color: #ffffff;
-      animation: pulse 1s infinite alternate;
-    }
-    @keyframes pulse {
-      from { transform: scale(1); }
-      to { transform: scale(1.05); }
-    }
-    .card {
-      margin: 0 auto;
-      width: 90%;
-      background: #a100ff;
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 20px;
+      padding: 8px;
+      overflow: hidden;
       position: relative;
     }
-    .logout, .bell {
-      position: absolute;
-      top: 20px;
-      background: rgba(255,255,255,0.2);
-      padding: 5px 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 14px;
+
+    .top-banner span {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 10s linear infinite;
     }
-    .logout { right: 10px; }
-    .bell { right: 90px; color: orange; }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .card {
+      background: #8100e3;
+      border-radius: 20px;
+      margin: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
     .balance-section {
-      margin-top: 40px;
-    }
-    .balance {
-      font-size: 28px;
-      margin: 10px 0;
-    }
-    .buttons {
       display: flex;
       justify-content: space-between;
-      margin-top: 15px;
+      align-items: center;
     }
-    .buttons button {
-      flex: 1;
-      margin: 5px;
-      background: #c764ff;
+
+    .balance-section h2 {
+      font-size: 28px;
+      margin: 10px 0 5px;
+    }
+
+    .balance-section small {
+      color: #e0dfff;
+    }
+
+    .bell {
+      background: rgba(255,255,255,0.1);
+      padding: 10px;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .bell::after {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+      top: 6px;
+      right: 6px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .actions button {
+      background: #9b00f0;
       border: none;
-      padding: 12px;
-      border-radius: 25px;
       color: white;
+      padding: 12px 25px;
+      border-radius: 30px;
       font-weight: bold;
       cursor: pointer;
     }
-    .grid {
+
+    .features {
+      background: #fff;
+      border-radius: 25px 25px 0 0;
+      padding: 20px;
+      color: #000;
+    }
+
+    .features-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 15px;
-      margin: 0 5% 30px;
-    }
-    .grid-item {
-      background: #ffffff;
-      color: black;
       text-align: center;
-      border-radius: 15px;
-      padding: 10px 5px;
-      font-size: 14px;
+      font-size: 13px;
+    }
+
+    .features-grid div {
       cursor: pointer;
     }
-    .grid-item img {
-      width: 30px;
-      height: 30px;
-      margin-bottom: 5px;
-    }
+
     .promotions {
-      background: white;
-      padding: 10px;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
+      margin-top: 20px;
     }
-    .promo-slide {
-      width: 100%;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      text-align: center;
-      background: linear-gradient(45deg, #ff0055, #ff7b00);
-      padding: 20px;
+
+    .promotion-slide {
+      background: #7000cc;
       border-radius: 15px;
-      margin: 10px 0;
-      transition: transform 0.3s ease;
+      padding: 15px;
+      color: white;
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .slider {
+      display: flex;
+      width: 300%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .promotion-wrapper {
+      overflow: hidden;
+      border-radius: 15px;
+    }
+
+    h3 {
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="header" id="animatedLogo">PayGo</div>
 
+  <!-- Top Scrolling Notice -->
+  <div class="top-banner">
+    <span>🚫 Opay bank transfers. Please use other banks for your payments. 🚫</span>
+  </div>
+
+  <!-- Balance Card -->
   <div class="card">
-    <div class="bell" onclick="location.href='history.html'">🔔</div>
-    <div class="logout" onclick="logout()">Logout</div>
     <div class="balance-section">
-      <div>Hi, <span id="username">User</span> 👋</div>
-      <div>Welcome back!</div>
-      <div class="balance">₦<span id="balance">0.00</span> <span onclick="toggleBalance()">👁️</span></div>
-      <div>Weekly Rewards: ₦<span id="reward">0.00</span></div>
+      <div>
+        <strong>Hi, <span id="username">User</span> 👋</strong>
+        <p>Welcome back!</p>
+        <h2 id="balance">₦180,000.00</h2>
+        <small>Weekly Rewards: ₦180,000.00</small>
+      </div>
+      <div class="bell" onclick="location.href='history.html'">
+        🔔
+      </div>
     </div>
-    <div class="buttons">
+
+    <!-- Upgrade / Transfer -->
+    <div class="actions">
       <button onclick="location.href='earn.html'">Upgrade</button>
       <button onclick="location.href='withdraw.html'">Transfer</button>
     </div>
   </div>
 
-  <div class="grid">
-    <div class="grid-item" onclick="location.href='buy.html'">
-      <img src="https://img.icons8.com/color/48/000000/money.png"/>
-      Buy PAY ID
+  <!-- Features Section -->
+  <div class="features">
+    <div class="features-grid">
+      <div onclick="location.href='buy.html'">💳<br/>Buy PAY ID</div>
+      <div onclick="location.href='watch.html'">📺<br/>Watch</div>
+      <div onclick="location.href='airtime.html'">📶<br/>Airtime</div>
+      <div onclick="location.href='data.html'">🛢<br/>Data</div>
+      <div onclick="location.href='support.html'">🎧<br/>Support</div>
+      <div onclick="location.href='group.html'">🌐<br/>Group</div>
+      <div onclick="location.href='earn.html'">💰<br/>Earn More</div>
+      <div onclick="location.href='profile.html'">👤<br/>Profile</div>
     </div>
-    <div class="grid-item" onclick="location.href='watch.html'">
-      <img src="https://img.icons8.com/color/48/000000/retro-tv.png"/>
-      Watch
-    </div>
-    <div class="grid-item" onclick="location.href='airtime.html'">
-      <img src="https://img.icons8.com/color/48/000000/smartphone-tablet.png"/>
-      Airtime
-    </div>
-    <div class="grid-item" onclick="location.href='data.html'">
-      <img src="https://img.icons8.com/color/48/000000/database.png"/>
-      Data
-    </div>
-    <div class="grid-item" onclick="location.href='support.html'">
-      <img src="https://img.icons8.com/color/48/000000/help.png"/>
-      Support
-    </div>
-    <div class="grid-item" onclick="location.href='group.html'">
-      <img src="https://img.icons8.com/color/48/000000/group.png"/>
-      Group
-    </div>
-    <div class="grid-item" onclick="location.href='earn.html'">
-      <img src="https://img.icons8.com/color/48/000000/money-bag.png"/>
-      Earn More
-    </div>
-    <div class="grid-item" onclick="location.href='profile.html'">
-      <img src="https://img.icons8.com/color/48/000000/user.png"/>
-      Profile
+
+    <!-- Auto Sliding Promotions -->
+    <div class="promotions">
+      <h3>Current Promotions</h3>
+      <div class="promotion-wrapper">
+        <div class="slider" id="promoSlider">
+          <div class="promotion-slide">🔥 Get 2x Rewards When You Refer Friends!</div>
+          <div class="promotion-slide">📢 Mobile Money Bonuses Available This Weekend!</div>
+          <div class="promotion-slide">🎁 Upgrade Now & Win Weekly Airtime Gifts!</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="promotions">
-    <h3 style="color: black;">Current Promotions</h3>
-    <div class="promo-slide" id="promoText">
-      💸 PayGo Recharge Bonus — Earn up to ₦5,000 weekly on every airtime recharge!
-    </div>
-  </div>
-
+  <!-- Script for username, balance, and promotions -->
   <script>
-    // Load username and balance
-    const user = localStorage.getItem("paygoUser") || "User";
-    const balance = localStorage.getItem("paygoBalance") || "180000.00";
-    document.getElementById("username").textContent = user;
-    document.getElementById("balance").textContent = parseFloat(balance).toLocaleString();
-    document.getElementById("reward").textContent = parseFloat(balance).toLocaleString();
+    // Display username from localStorage
+    const username = localStorage.getItem("paygo_username") || "User";
+    document.getElementById("username").textContent = username;
 
-    function toggleBalance() {
-      const bal = document.getElementById("balance");
-      bal.textContent = bal.textContent === "•••••••" ? parseFloat(balance).toLocaleString() : "•••••••";
-    }
+    // Display balance from localStorage
+    const balance = localStorage.getItem("paygo_balance") || "180000";
+    document.getElementById("balance").textContent = "₦" + Number(balance).toLocaleString("en-NG", {
+      minimumFractionDigits: 2,
+    });
 
-    function logout() {
-      localStorage.removeItem("paygoUser");
-      window.location.href = "index.html";
-    }
-
-    // Animated Promotions
-    const promotions = [
-      "💸 PayGo Recharge Bonus — Earn up to ₦5,000 weekly on every airtime recharge!",
-      "🎁 Invite & Earn — Get ₦1,000 for every friend you invite!",
-      "⚡ Double Data Days — Get 2x the data on all plans this weekend!"
-    ];
-    let promoIndex = 0;
+    // Auto slide promotions
+    let currentSlide = 0;
+    const promoSlider = document.getElementById("promoSlider");
     setInterval(() => {
-      promoIndex = (promoIndex + 1) % promotions.length;
-      document.getElementById("promoText").textContent = promotions[promoIndex];
+      currentSlide = (currentSlide + 1) % 3;
+      promoSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
     }, 2000);
   </script>
+
 </body>
 </html>
