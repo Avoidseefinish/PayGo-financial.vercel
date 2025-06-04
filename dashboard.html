@@ -8,146 +8,193 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #9900ff, #cc66ff);
+      background: linear-gradient(to bottom, #a100ff, #d200ff);
       color: white;
+      overflow-x: hidden;
     }
-
     .header {
-      background: #8000ff;
-      padding: 20px;
       text-align: center;
-      font-size: 24px;
+      padding: 20px 0;
+      font-size: 26px;
       font-weight: bold;
+      color: #ffffff;
       animation: pulse 1s infinite alternate;
     }
-
     @keyframes pulse {
-      from { transform: translateX(-2px); }
-      to { transform: translateX(2px); }
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
     }
-
     .card {
-      background: #a933ff;
-      margin: 20px;
-      border-radius: 15px;
+      margin: 0 auto;
+      width: 90%;
+      background: #a100ff;
+      border-radius: 20px;
       padding: 20px;
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+      position: relative;
     }
-
-    .balance {
-      font-size: 30px;
-      font-weight: bold;
-    }
-
-    .reward {
+    .logout, .bell {
+      position: absolute;
+      top: 20px;
+      background: rgba(255,255,255,0.2);
+      padding: 5px 15px;
+      border-radius: 10px;
+      cursor: pointer;
       font-size: 14px;
-      margin-top: 5px;
     }
-
-    .btn-row {
+    .logout { right: 10px; }
+    .bell { right: 90px; color: orange; }
+    .balance-section {
+      margin-top: 40px;
+    }
+    .balance {
+      font-size: 28px;
+      margin: 10px 0;
+    }
+    .buttons {
       display: flex;
-      justify-content: space-around;
-      margin: 20px 0;
+      justify-content: space-between;
+      margin-top: 15px;
     }
-
-    .btn {
-      background: white;
-      color: #8000ff;
-      padding: 10px 20px;
-      border-radius: 30px;
+    .buttons button {
+      flex: 1;
+      margin: 5px;
+      background: #c764ff;
+      border: none;
+      padding: 12px;
+      border-radius: 25px;
+      color: white;
       font-weight: bold;
-      text-decoration: none;
+      cursor: pointer;
     }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 15px;
-      padding: 0 20px;
-      text-align: center;
+      margin: 0 5% 30px;
     }
-
-    .grid div {
-      background: white;
-      color: #8000ff;
+    .grid-item {
+      background: #ffffff;
+      color: black;
+      text-align: center;
       border-radius: 15px;
-      padding: 10px;
-      font-size: 12px;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 10px 5px;
+      font-size: 14px;
       cursor: pointer;
     }
-
+    .grid-item img {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 5px;
+    }
     .promotions {
-      background: #fff;
-      color: #333;
-      border-radius: 20px 20px 0 0;
-      margin-top: 30px;
-      padding: 20px;
+      background: white;
+      padding: 10px;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
     }
-
     .promo-slide {
-      display: none;
-      font-size: 14px;
+      width: 100%;
+      color: white;
       font-weight: bold;
-      color: #8000ff;
-    }
-
-    .promo-slide.active {
-      display: block;
-      animation: fade 0.5s ease-in-out;
-    }
-
-    @keyframes fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      font-size: 18px;
+      text-align: center;
+      background: linear-gradient(45deg, #ff0055, #ff7b00);
+      padding: 20px;
+      border-radius: 15px;
+      margin: 10px 0;
+      transition: transform 0.3s ease;
     }
   </style>
 </head>
 <body>
-  <div class="header">PayGo</div>
+  <div class="header" id="animatedLogo">PayGo</div>
 
   <div class="card">
-    <div style="font-size: 18px;">Hi, <span id="username">User</span> 👋<br>Welcome back!</div>
-    <div class="balance">₦180,000.00</div>
-    <div class="reward">Weekly Rewards: ₦180,000.00</div>
-    <div class="btn-row">
-      <a href="earn.html" class="btn">Upgrade</a>
-      <a href="withdraw.html" class="btn">Transfer</a>
+    <div class="bell" onclick="location.href='history.html'">🔔</div>
+    <div class="logout" onclick="logout()">Logout</div>
+    <div class="balance-section">
+      <div>Hi, <span id="username">User</span> 👋</div>
+      <div>Welcome back!</div>
+      <div class="balance">₦<span id="balance">0.00</span> <span onclick="toggleBalance()">👁️</span></div>
+      <div>Weekly Rewards: ₦<span id="reward">0.00</span></div>
+    </div>
+    <div class="buttons">
+      <button onclick="location.href='earn.html'">Upgrade</button>
+      <button onclick="location.href='withdraw.html'">Transfer</button>
     </div>
   </div>
 
   <div class="grid">
-    <div onclick="location.href='buy.html'">Buy PAY ID</div>
-    <div onclick="location.href='watch.html'">Watch</div>
-    <div onclick="location.href='airtime.html'">Airtime</div>
-    <div onclick="location.href='data.html'">Data</div>
-    <div onclick="location.href='support.html'">Support</div>
-    <div onclick="location.href='group.html'">Group</div>
-    <div onclick="location.href='earn.html'">Earn More</div>
-    <div onclick="location.href='profile.html'">Profile</div>
+    <div class="grid-item" onclick="location.href='buy.html'">
+      <img src="https://img.icons8.com/color/48/000000/money.png"/>
+      Buy PAY ID
+    </div>
+    <div class="grid-item" onclick="location.href='watch.html'">
+      <img src="https://img.icons8.com/color/48/000000/retro-tv.png"/>
+      Watch
+    </div>
+    <div class="grid-item" onclick="location.href='airtime.html'">
+      <img src="https://img.icons8.com/color/48/000000/smartphone-tablet.png"/>
+      Airtime
+    </div>
+    <div class="grid-item" onclick="location.href='data.html'">
+      <img src="https://img.icons8.com/color/48/000000/database.png"/>
+      Data
+    </div>
+    <div class="grid-item" onclick="location.href='support.html'">
+      <img src="https://img.icons8.com/color/48/000000/help.png"/>
+      Support
+    </div>
+    <div class="grid-item" onclick="location.href='group.html'">
+      <img src="https://img.icons8.com/color/48/000000/group.png"/>
+      Group
+    </div>
+    <div class="grid-item" onclick="location.href='earn.html'">
+      <img src="https://img.icons8.com/color/48/000000/money-bag.png"/>
+      Earn More
+    </div>
+    <div class="grid-item" onclick="location.href='profile.html'">
+      <img src="https://img.icons8.com/color/48/000000/user.png"/>
+      Profile
+    </div>
   </div>
 
   <div class="promotions">
-    <h3 style="color:#333;">Current Promotions</h3>
-    <div class="promo-slide active">🎁 Transact & Win — Cheers Gold Crest Mall | ChrisMar Hotel | Hot Spot Pub & Grill</div>
-    <div class="promo-slide">🎉 Pay with PayGo in store and win — Weekly gift prize draw available to all users</div>
-    <div class="promo-slide">🔥 Flash Promo! Use PayGo this week and get automatic entry into ₦100,000 giveaway</div>
+    <h3 style="color: black;">Current Promotions</h3>
+    <div class="promo-slide" id="promoText">
+      💸 PayGo Recharge Bonus — Earn up to ₦5,000 weekly on every airtime recharge!
+    </div>
   </div>
 
   <script>
-    // Set registered user name from localStorage
+    // Load username and balance
     const user = localStorage.getItem("paygoUser") || "User";
+    const balance = localStorage.getItem("paygoBalance") || "180000.00";
     document.getElementById("username").textContent = user;
+    document.getElementById("balance").textContent = parseFloat(balance).toLocaleString();
+    document.getElementById("reward").textContent = parseFloat(balance).toLocaleString();
 
-    // Sliding promotion every 2 seconds
-    let current = 0;
-    const slides = document.querySelectorAll('.promo-slide');
+    function toggleBalance() {
+      const bal = document.getElementById("balance");
+      bal.textContent = bal.textContent === "•••••••" ? parseFloat(balance).toLocaleString() : "•••••••";
+    }
+
+    function logout() {
+      localStorage.removeItem("paygoUser");
+      window.location.href = "index.html";
+    }
+
+    // Animated Promotions
+    const promotions = [
+      "💸 PayGo Recharge Bonus — Earn up to ₦5,000 weekly on every airtime recharge!",
+      "🎁 Invite & Earn — Get ₦1,000 for every friend you invite!",
+      "⚡ Double Data Days — Get 2x the data on all plans this weekend!"
+    ];
+    let promoIndex = 0;
     setInterval(() => {
-      slides[current].classList.remove('active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('active');
+      promoIndex = (promoIndex + 1) % promotions.length;
+      document.getElementById("promoText").textContent = promotions[promoIndex];
     }, 2000);
   </script>
 </body>
