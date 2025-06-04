@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Receipt</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background: white;
+      padding: 30px;
+    }
+    .icon {
+      background: #a000ff;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 40px auto 10px;
+      position: relative;
+    }
+    .icon:after {
+      content: '🎉';
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      background: pink;
+      border-radius: 50%;
+      font-size: 20px;
+      padding: 5px;
+    }
+    .checkmark {
+      font-size: 50px;
+      color: white;
+    }
+    h2 {
+      color: #a000ff;
+      font-size: 22px;
+      margin-top: 20px;
+    }
+    p {
+      color: #333;
+      margin-top: 10px;
+      font-size: 17px;
+    }
+    .success-tag {
+      background: #fde6f4;
+      color: #a000ff;
+      display: inline-block;
+      padding: 10px 25px;
+      margin: 20px auto;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+    .btn {
+      display: block;
+      width: 90%;
+      max-width: 300px;
+      margin: 20px auto;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .purple {
+      background: #a000ff;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="icon">
+    <div class="checkmark">✔️</div>
+  </div>
+  <h2>Transfer Successful!</h2>
+  <p>Your Data purchase of <span id="amount">₦0</span> was completed successfully.</p>
+  <div class="success-tag">🎉 Success</div>
+  <button class="btn purple" onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const amount = urlParams.get('amount');
+    if (amount) {
+      document.getElementById('amount').textContent = `₦${amount}`;
+    }
+  </script>
+</body>
+</html>
