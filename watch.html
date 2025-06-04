@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Watch - How to Earn</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #fff;
+    }
+
+    .header {
+      background: #a128d6;
+      height: 50px;
+    }
+
+    .back {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .back span {
+      font-size: 20px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .title-section {
+      padding: 0 20px;
+    }
+
+    .title-section h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: #000;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .video-container {
+      margin: 30px 20px;
+      background: #222;
+      height: 200px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .video-icon {
+      font-size: 40px;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Purple Header -->
+  <div class="header"></div>
+
+  <!-- Back and Watch Title -->
+  <div class="back" onclick="history.back()">
+    <span>&larr;</span> Watch
+  </div>
+
+  <!-- Title and Tags -->
+  <div class="title-section">
+    <h2>How to Earn with PayGo</h2>
+    <div class="tags">
+      <div class="tag">How to Earn with Paygo</div>
+      <div class="tag">INCLUDES AI</div>
+      <div class="tag">ARAB MONEY Community</div>
+    </div>
+  </div>
+
+  <!-- Video Container -->
+  <div class="video-container" id="videoBox">
+    <!-- 👇 Replace the video link below when ready -->
+    <!-- <video src="your-video-link.mp4" controls></video> -->
+    <div class="video-icon">🎥</div>
+  </div>
+
+</body>
+</html>
