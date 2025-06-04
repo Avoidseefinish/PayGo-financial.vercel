@@ -183,7 +183,9 @@
       }
 
       errorMsg.textContent = "";
-      window.location.href = "loading1.html";
+      localStorage.setItem("lastTransferAmount", "₦" + amount);
+     window.location.href = "loading1.html";
+   
     }
   </script>
 
