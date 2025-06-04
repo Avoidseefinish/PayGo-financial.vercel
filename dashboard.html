@@ -94,11 +94,13 @@
     .features {
       background: #fff;
       border-radius: 25px 25px 0 0;
-      padding: 20px;
+      padding: 20px 15px 30px 15px;
       color: #000;
     }
 
     .features-grid {
+      max-width: 360px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 15px;
@@ -111,17 +113,15 @@
     }
 
     .promotions {
-      margin-top: 20px;
+      margin-top: 0;
     }
 
-    .promotion-slide {
+    .promotion-wrapper {
+      overflow: hidden;
+      border-radius: 0;
+      margin: 0;
+      width: 100vw;
       background: #7000cc;
-      border-radius: 15px;
-      padding: 15px;
-      color: white;
-      text-align: center;
-      width: 100%;
-      box-sizing: border-box;
     }
 
     .slider {
@@ -130,13 +130,18 @@
       transition: transform 0.5s ease-in-out;
     }
 
-    .promotion-wrapper {
-      overflow: hidden;
-      border-radius: 15px;
+    .promotion-slide {
+      width: 100vw;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+      color: #fff;
+      font-size: 15px;
     }
 
     h3 {
-      margin-bottom: 10px;
+      margin: 15px;
+      text-align: center;
     }
   </style>
 </head>
@@ -156,9 +161,7 @@
         <h2 id="balance">₦180,000.00</h2>
         <small>Weekly Rewards: ₦180,000.00</small>
       </div>
-      <div class="bell" onclick="location.href='history.html'">
-        🔔
-      </div>
+      <div class="bell" onclick="location.href='history.html'">🔔</div>
     </div>
 
     <!-- Upgrade / Transfer -->
@@ -180,38 +183,37 @@
       <div onclick="location.href='earn.html'">💰<br/>Earn More</div>
       <div onclick="location.href='profile.html'">👤<br/>Profile</div>
     </div>
+  </div>
 
-    <!-- Auto Sliding Promotions -->
-    <div class="promotions">
-      <h3>Current Promotions</h3>
-      <div class="promotion-wrapper">
-        <div class="slider" id="promoSlider">
-          <div class="promotion-slide">🔥 Get 2x Rewards When You Refer Friends!</div>
-          <div class="promotion-slide">📢 Mobile Money Bonuses Available This Weekend!</div>
-          <div class="promotion-slide">🎁 Upgrade Now & Win Weekly Airtime Gifts!</div>
-        </div>
+  <!-- Auto Sliding Promotions (Full Width) -->
+  <div class="promotions">
+    <div class="promotion-wrapper">
+      <div class="slider" id="promoSlider">
+        <div class="promotion-slide">🔥 Get 2x Rewards When You Refer Friends!</div>
+        <div class="promotion-slide">📢 Mobile Money Bonuses Available This Weekend!</div>
+        <div class="promotion-slide">🎁 Upgrade Now & Win Weekly Airtime Gifts!</div>
       </div>
     </div>
   </div>
 
-  <!-- Script for username, balance, and promotions -->
+  <!-- Script for username, balance, and promotion slider -->
   <script>
-    // Display username from localStorage
+    // Display username
     const username = localStorage.getItem("paygo_username") || "User";
     document.getElementById("username").textContent = username;
 
-    // Display balance from localStorage
+    // Display balance
     const balance = localStorage.getItem("paygo_balance") || "180000";
     document.getElementById("balance").textContent = "₦" + Number(balance).toLocaleString("en-NG", {
       minimumFractionDigits: 2,
     });
 
-    // Auto slide promotions
+    // Auto-slide promotions
     let currentSlide = 0;
     const promoSlider = document.getElementById("promoSlider");
     setInterval(() => {
       currentSlide = (currentSlide + 1) % 3;
-      promoSlider.style.transform = `translateX(-${currentSlide * 100}%)`;
+      promoSlider.style.transform = `translateX(-${currentSlide * 100}vw)`;
     }, 2000);
   </script>
 
