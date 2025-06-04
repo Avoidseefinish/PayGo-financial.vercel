@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>proccessing</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: white;
+      text-align: center;
+    }
+
+    header {
+      background: linear-gradient(to right, #a100ec, #27003d);
+      color: white;
+      padding: 18px;
+      font-size: 18px;
+      text-align: left;
+    }
+
+    .spinner {
+      margin: 60px auto 20px;
+      width: 50px;
+      height: 50px;
+      border: 5px solid #eaeaea;
+      border-top: 5px solid #a100ec;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 20px;
+      color: #000;
+    }
+
+    p {
+      color: gray;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .progress-bar {
+      width: 80%;
+      height: 6px;
+      background-color: #eee;
+      border-radius: 10px;
+      margin: 30px auto;
+      overflow: hidden;
+    }
+
+    .progress {
+      height: 100%;
+      width: 20%;
+      background-color: #a100ec;
+      animation: load 7s linear forwards;
+    }
+
+    @keyframes load {
+      0% { width: 10%; }
+      100% { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>withdrawal is proccessing</header>
+
+  <div class="spinner"></div>
+  <h2>Preparing your withdrwal</h2>
+  <p>Please wait while your withdrwal is proccessing...</p>
+
+  <div class="progress-bar">
+    <div class="progress"></div>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "load.html";
+    }, 7000);
+  </script>
+
+</body>
+</html>
