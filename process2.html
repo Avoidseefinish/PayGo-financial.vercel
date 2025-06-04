@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Processing data Purchase</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background: #ffffff;
+    }
+    .topbar {
+      background: #a000ff;
+      color: white;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .loader {
+      margin-top: 80px;
+      width: 80px;
+      height: 80px;
+      border: 10px solid #eee;
+      border-top: 10px solid orange;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .text {
+      margin-top: 40px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">Processing</div>
+  <div class="loader"></div>
+  <div class="text">
+    Processing your data purchase...<br>
+    Please wait.
+  </div>
+
+  <script>
+    // Get the amount from localStorage
+    const amount = localStorage.getItem("airtimeAmount") || "₦0";
+
+    setTimeout(() => {
+      window.location.href = `receipt1-airtime.html?amount=${amount}`;
+    }, 7000);
+  </script>
+</body>
+</html>
