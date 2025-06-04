@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PayGo Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; background: #f5f5f5;
+    }
+    .paygo-logo {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin: 15px 0;
+      background: linear-gradient(45deg, #ff0080, #ff8c00);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: flicker 1s infinite alternate;
+    }
+    @keyframes flicker {
+      from { opacity: 0.8; } to { opacity: 1; }
+    }
+
+    .user-box {
+      background: linear-gradient(135deg, #9900ff, #cc66ff);
+      color: white;
+      padding: 20px;
+      border-radius: 20px;
+      margin: 10px;
+      text-align: center;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+    .menu-grid div {
+      background: white;
+      border-radius: 10px;
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+    }
+    .menu-grid img {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 5px;
+    }
+
+    .carousel {
+      margin: 15px;
+      overflow: hidden;
+      border-radius: 15px;
+    }
+    .slides {
+      display: flex;
+      transition: transform 1s ease;
+    }
+    .slides img {
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .popup {
+      position: fixed;
+      top: 10%;
+      left: 5%;
+      width: 90%;
+      background: linear-gradient(to right, #ff0080, #ff8c00);
+      color: white;
+      padding: 20px;
+      border-radius: 20px;
+      z-index: 999;
+      text-align: center;
+      animation: slideup 0.5s ease-in;
+    }
+    @keyframes slideup {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .popup button {
+      padding: 10px 20px;
+      background: white;
+      color: #ff0080;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="welcomePopup" class="popup">
+    <h2>Welcome to PayGo, <span id="usernamePopup"></span>!</h2>
+    <p>Step 5 of 5</p>
+    <div style="margin: 10px 0;">
+      <span style="display:inline-block;width:15px;height:6px;background:white;border-radius:10px;margin:2px;"></span>
+      <span style="display:inline-block;width:15px;height:6px;background:white;border-radius:10px;margin:2px;"></span>
+      <span style="display:inline-block;width:15px;height:6px;background:white;border-radius:10px;margin:2px;"></span>
+      <span style="display:inline-block;width:15px;height:6px;background:white;border-radius:10px;margin:2px;"></span>
+      <span style="display:inline-block;width:15px;height:6px;background:white;border-radius:10px;margin:2px;"></span>
+    </div>
+    <h3>Earn More</h3>
+    <p>Refer friends to earn ₦500 per referral, join our communities and explore more offers!</p>
+    <div style="margin:10px 0;">
+      <button onclick="window.location.href='group.html'">Communities</button>
+      <button onclick="window.location.href='support.html'">Support</button>
+    </div>
+    <button onclick="closePopup()">Get Started →</button>
+  </div>
+
+  <div class="paygo-logo">PayGo</div>
+
+  <div class="user-box">
+    <div><strong>Hi, <span id="usernameDashboard">User</span> 👋</strong><br/>Welcome back!</div>
+    <div style="margin-top:10px;">Your Balance</div>
+    <div style="font-size: 24px; font-weight: bold;">₦180,000.00</div>
+    <div>Weekly Rewards: ₦180,000.00</div>
+    <div style="margin-top: 15px;">
+      <button onclick="location.href='earn.html'" style="margin-right:10px;">Upgrade</button>
+      <button onclick="location.href='withdraw.html'">Transfer</button>
+    </div>
+  </div>
+
+  <div class="menu-grid">
+    <div onclick="location.href='buy.html'"><img src="https://img.icons8.com/color/48/credit-card.png"/>Buy PAY ID</div>
+    <div onclick="location.href='watch.html'"><img src="https://img.icons8.com/color/48/tv.png"/>Watch</div>
+    <div onclick="location.href='airtime.html'"><img src="https://img.icons8.com/color/48/bar-chart.png"/>Airtime</div>
+    <div onclick="location.href='data.html'"><img src="https://img.icons8.com/color/48/folder-invoices.png"/>Data</div>
+    <div onclick="location.href='support.html'"><img src="https://img.icons8.com/color/48/headphones.png"/>Support</div>
+    <div onclick="location.href='group.html'"><img src="https://img.icons8.com/color/48/internet.png"/>Group</div>
+    <div onclick="location.href='earn.html'"><img src="https://img.icons8.com/color/48/money-bag.png"/>Earn More</div>
+    <div onclick="location.href='profile.html'"><img src="https://img.icons8.com/color/48/user.png"/>Profile</div>
+  </div>
+
+  <div style="padding: 10px 20px; font-weight: bold;">Current Promotions</div>
+  <div class="carousel">
+    <div class="slides" id="slider">
+      <img src="/mnt/data/230C0C66-AB39-4998-9A43-BD676D4325DF.jpeg" />
+      <img src="/mnt/data/2C19F9E1-1684-4F51-8731-FFF7DE31D181.jpeg" />
+      <img src="/mnt/data/633DC6AD-6DBE-4B7B-81F0-F85172A295EC.jpeg" />
+      <img src="/mnt/data/429DBF25-5EF6-445E-97AE-4230D3D4D439.jpeg" />
+    </div>
+  </div>
+
+  <script>
+    // Show username from localStorage
+    const username = localStorage.getItem("username") || "User";
+    document.getElementById("usernameDashboard").innerText = username;
+    document.getElementById("usernamePopup").innerText = username;
+
+    // Auto-slide carousel every 2s
+    let index = 0;
+    setInterval(() => {
+      index = (index + 1) % 4;
+      document.getElementById("slider").style.transform = `translateX(-${index * 100}%)`;
+    }, 2000);
+
+    function closePopup() {
+      document.getElementById("welcomePopup").style.display = "none";
+    }
+  </script>
+</body>
+</html>
