@@ -113,30 +113,14 @@
     }
 
     .promotions {
-      margin-top: 0;
-    }
-
-    .promotion-wrapper {
-      overflow: hidden;
-      border-radius: 0;
-      margin: 0;
+      background: #8a00ff;
       width: 100vw;
-      background: #7000cc;
-    }
-
-    .slider {
-      display: flex;
-      width: 300%;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .promotion-slide {
-      width: 100vw;
-      padding: 20px;
+      padding: 30px 10px;
       box-sizing: border-box;
-      text-align: center;
       color: #fff;
-      font-size: 15px;
+      font-size: 17px;
+      font-weight: bold;
+      text-align: center;
     }
 
     h3 {
@@ -185,36 +169,34 @@
     </div>
   </div>
 
-  <!-- Auto Sliding Promotions (Full Width) -->
-  <div class="promotions">
-    <div class="promotion-wrapper">
-      <div class="slider" id="promoSlider">
-        <div class="promotion-slide">🔥 Get 2x Rewards When You Refer Friends!</div>
-        <div class="promotion-slide">📢 Mobile Money Bonuses Available This Weekend!</div>
-        <div class="promotion-slide">🎁 Upgrade Now & Win Weekly Airtime Gifts!</div>
-      </div>
-    </div>
+  <!-- Bigger Promotions Section Below Features -->
+  <div class="promotions" id="promoText">
+    🎁 Upgrade Now & Win Weekly Airtime Gifts!
   </div>
 
-  <!-- Script for username, balance, and promotion slider -->
+  <!-- Script for username, balance -->
   <script>
-    // Display username
+    // Set username from localStorage
     const username = localStorage.getItem("paygo_username") || "User";
     document.getElementById("username").textContent = username;
 
-    // Display balance
+    // Set balance from localStorage
     const balance = localStorage.getItem("paygo_balance") || "180000";
     document.getElementById("balance").textContent = "₦" + Number(balance).toLocaleString("en-NG", {
       minimumFractionDigits: 2,
     });
 
-    // Auto-slide promotions
-    let currentSlide = 0;
-    const promoSlider = document.getElementById("promoSlider");
+    // Optional: Animate text (slide promotions every few seconds)
+    const promotions = [
+      "🎁 Upgrade Now & Win Weekly Airtime Gifts!",
+      "🔥 Refer Friends & Get ₦500 Each!",
+      "📢 Mobile Money Bonuses This Week!",
+    ];
+    let index = 0;
     setInterval(() => {
-      currentSlide = (currentSlide + 1) % 3;
-      promoSlider.style.transform = `translateX(-${currentSlide * 100}vw)`;
-    }, 2000);
+      index = (index + 1) % promotions.length;
+      document.getElementById("promoText").textContent = promotions[index];
+    }, 3000);
   </script>
 
 </body>
