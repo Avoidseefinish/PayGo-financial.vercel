@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f5f5f5;
+      position: relative;
+    }
+
+    /* Simulated Dashboard (background layer) */
+    .dashboard {
+      background: linear-gradient(to bottom, #8e2de2, #4a00e0);
+      color: white;
+      padding: 20px;
+      border-radius: 20px;
+      margin: 20px;
+    }
+
+    .balance {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+
+    /* Modal Style */
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      z-index: 10;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .modal h3 {
+      margin: 0 0 10px;
+    }
+
+    .profile-pic {
+      width: 80px;
+      height: 80px;
+      background: #e0e0e0;
+      border-radius: 50%;
+      font-size: 30px;
+      color: #444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px auto;
+    }
+
+    .upload-btn {
+      margin: 10px auto;
+      display: block;
+      padding: 12px;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+      border-radius: 10px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .save-btn {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      background: linear-gradient(to right, #ff416c, #8e2de2);
+      border: none;
+      color: white;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Simulated Dashboard in Background -->
+  <div class="dashboard">
+    <div><strong>Hi, Khalifah 👋</strong><br>Welcome back!</div>
+    <div class="balance">₦180,000.00</div>
+  </div>
+
+  <!-- Profile Modal -->
+  <div class="modal">
+    <div class="close-btn" onclick="goBack()">×</div>
+    <h3>Profile Picture</h3>
+    <div class="profile-pic" id="initial">K</div>
+    <input type="file" id="fileInput" style="display:none" accept="image/*">
+    <button class="upload-btn" onclick="document.getElementById('fileInput').click()">📤 Upload New Picture</button>
+    <button class="save-btn" onclick="redirectDashboard()">Save Changes</button>
+  </div>
+
+  <script>
+    function redirectDashboard() {
+      window.location.href = "dashboard.html";
+    }
+
+    function goBack() {
+      window.location.href = "dashboard.html";
+    }
+  </script>
+</body>
+</html>
