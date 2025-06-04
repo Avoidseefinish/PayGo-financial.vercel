@@ -8,196 +8,216 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #F5E6FC;
+      background: #f5ebff;
     }
-
-    .header {
-      background-color: #A626D3;
-      color: white;
-      padding: 10px;
+    .notice-bar {
+      background: white;
+      color: red;
+      padding: 6px;
       text-align: center;
-      font-size: 20px;
-      animation: pulse 1s infinite alternate;
-    }
-
-    @keyframes pulse {
-      from { letter-spacing: 0px; }
-      to { letter-spacing: 2px; }
-    }
-
-    .balance-card {
-      background-color: #A626D3;
-      color: white;
-      margin: 20px;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      position: relative;
-    }
-
-    .bell {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      cursor: pointer;
-    }
-
-    .balance {
-      font-size: 30px;
+      font-size: 13px;
       font-weight: bold;
-      margin: 10px 0;
     }
-
-    .buttons {
+    .top-card {
+      background: #9c27b0;
+      color: white;
+      border-radius: 20px;
+      margin: 20px;
+      padding: 20px;
+    }
+    .header {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
+      align-items: center;
     }
-
-    .buttons button {
-      background-color: white;
-      color: #A626D3;
-      border: none;
-      border-radius: 20px;
-      padding: 10px 20px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .features {
+    .profile {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      margin: 20px;
+      align-items: center;
+      gap: 10px;
     }
-
-    .feature {
-      text-align: center;
-      margin: 15px;
-    }
-
-    .feature img {
+    .initial {
+      background: white;
+      color: #9c27b0;
+      font-weight: bold;
+      border-radius: 50%;
       width: 40px;
       height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
-    .promotions {
-      margin: 20px;
-    }
-
-    .promo {
-      background-color: #A626D3;
-      color: white;
-      border-radius: 20px;
-      padding: 20px;
-      font-weight: bold;
-      animation: slide 6s infinite;
-      min-height: 120px;
-    }
-
-    @keyframes slide {
-      0%, 20% { transform: translateX(0%); opacity: 1; }
-      40%, 60% { transform: translateX(-100%); opacity: 0; }
-      80%, 100% { transform: translateX(0%); opacity: 1; }
-    }
-
-    .toggle-visibility {
-      position: absolute;
-      right: 60px;
-      top: 85px;
+    .bell {
+      position: relative;
+      font-size: 22px;
       cursor: pointer;
+    }
+    .dot {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 8px;
+      height: 8px;
+      background: red;
+      border-radius: 50%;
+    }
+    .balance-section {
+      margin-top: 20px;
+    }
+    .balance-title {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+    .balance-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #balance {
+      font-size: 26px;
+      font-weight: bold;
+    }
+    #toggle-balance {
+      font-size: 18px;
+      background: transparent;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    .weekly-reward {
+      font-size: 14px;
+      margin-top: 4px;
+      opacity: 0.8;
+    }
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .actions button {
+      background: #a842ff;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+      margin: 20px;
+      gap: 15px;
+      font-size: 14px;
+    }
+    .features div {
+      cursor: pointer;
+    }
+    .promotions {
+      margin: 0 20px 40px 20px;
+    }
+    .promotions h2 {
+      margin-bottom: 10px;
+    }
+    .promo-slide {
+      background: #ffe9ff;
+      color: #7b1fa2;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      font-weight: 600;
+      animation: slide 6s infinite;
+    }
+    @keyframes slide {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="header">PayGo</div>
+  <div class="notice-bar">ith Opay bank transfers. Please use other banks for your payment</div>
 
-  <div class="balance-card">
-    <div class="bell" onclick="location.href='history.html'">🔔</div>
-    <div id="username">Hi, User 👋</div>
-    <small>Welcome back!</small>
-
-    <div class="balance">
-      <span id="balanceText">₦<span id="balance">0.00</span></span>
-      <span class="toggle-visibility" onclick="toggleBalance()">👁️</span>
+  <div class="top-card">
+    <div class="header">
+      <div class="profile">
+        <div class="initial">K</div>
+        <div>
+          <div class="greeting">Hi, <span id="user-name">Khalifah</span> 👋</div>
+          <div class="sub-greeting">Welcome back!</div>
+        </div>
+      </div>
+      <div class="bell" onclick="window.location.href='history.html'">🔔<span class="dot"></span></div>
     </div>
-    <div>Weekly Rewards: ₦180,000.00</div>
 
-    <div class="buttons">
+    <div class="balance-section">
+      <div class="balance-title">Your Balance</div>
+      <div class="balance-row">
+        <div id="balance">₦180,000.00</div>
+        <button id="toggle-balance">🙈</button>
+      </div>
+      <div class="weekly-reward">Weekly Rewards: ₦180,000.00</div>
+    </div>
+
+    <div class="actions">
       <button onclick="location.href='earn.html'">Upgrade</button>
       <button onclick="location.href='withdraw.html'">Transfer</button>
     </div>
   </div>
 
   <div class="features">
-    <div class="feature" onclick="location.href='buy.html'">
-      <img src="https://img.icons8.com/external-flat-icons-inmotus-design/67/null/external-payment-money-flat-icons-inmotus-design.png"/>
-      <div>Buy PAY ID</div>
-    </div>
-    <div class="feature" onclick="location.href='watch.html'">
-      <img src="https://img.icons8.com/3d-fluency/94/tv.png"/>
-      <div>Watch</div>
-    </div>
-    <div class="feature" onclick="location.href='airtime.html'">
-      <img src="https://img.icons8.com/3d-fluency/94/cell-phone.png"/>
-      <div>Airtime</div>
-    </div>
-    <div class="feature" onclick="location.href='data.html'">
-      <img src="https://img.icons8.com/3d-fluency/94/database.png"/>
-      <div>Data</div>
-    </div>
-    <div class="feature" onclick="location.href='support.html'">
-      <img src="https://img.icons8.com/3d-fluency/94/headphones.png"/>
-      <div>Support</div>
-    </div>
-    <div class="feature" onclick="location.href='group.html'">
-      <img src="https://img.icons8.com/3d-fluency/94/network.png"/>
-      <div>Group</div>
-    </div>
-    <div class="feature" onclick="location.href='earn.html'">
-      <img src="https://img.icons8.com/3d-fluency/94/money-bag.png"/>
-      <div>Earn More</div>
-    </div>
-    <div class="feature" onclick="location.href='profile.html'">
-      <img src="https://img.icons8.com/3d-fluency/94/user.png"/>
-      <div>Profile</div>
-    </div>
+    <div onclick="location.href='buy.html'">💳<br>Buy PAY ID</div>
+    <div onclick="location.href='watch.html'">📺<br>Watch</div>
+    <div onclick="location.href='airtime.html'">📶<br>Airtime</div>
+    <div onclick="location.href='data.html'">🛢️<br>Data</div>
+    <div onclick="location.href='support.html'">🎧<br>Support</div>
+    <div onclick="location.href='group.html'">🌐<br>Group</div>
+    <div onclick="location.href='earn.html'">💰<br>Earn More</div>
+    <div onclick="location.href='profile.html'">👤<br>Profile</div>
   </div>
 
   <div class="promotions">
-    <div class="promo" id="promoText">🏀 August 27-28 - Mobile Money Game! Use PayGo & Win Big!</div>
+    <h2>Current Promotions</h2>
+    <div class="promo-slide" id="promo-text">🔥 Get Double Rewards This Week When You Invite Friends!</div>
   </div>
 
   <script>
-    const user = localStorage.getItem("username") || "User";
-    document.getElementById("username").innerText = `Hi, ${user} 👋`;
+    // Balance Show/Hide Toggle
+    let balanceVisible = true;
+    const balance = document.getElementById("balance");
+    const toggle = document.getElementById("toggle-balance");
 
-    function toggleBalance() {
-      const bal = document.getElementById("balanceText");
-      bal.style.display = bal.style.display === "none" ? "inline" : "none";
+    let userBalance = parseFloat(localStorage.getItem("userBalance")) || 180000;
+    updateBalanceDisplay();
+
+    toggle.addEventListener("click", () => {
+      balanceVisible = !balanceVisible;
+      updateBalanceDisplay();
+    });
+
+    function updateBalanceDisplay() {
+      balance.textContent = balanceVisible ? `₦${userBalance.toLocaleString()}.00` : '₦•••••••';
     }
 
-    // Balance storage
-    let balance = parseFloat(localStorage.getItem("balance") || "180000");
-    document.getElementById("balance").innerText = balance.toLocaleString("en-NG", { minimumFractionDigits: 2 });
-
-    // Auto-update after deductions
-    function updateBalance(newBalance) {
-      localStorage.setItem("balance", newBalance);
-      document.getElementById("balance").innerText = newBalance.toLocaleString("en-NG", { minimumFractionDigits: 2 });
+    // Balance deduction method (call manually)
+    function deductFromBalance(amount) {
+      userBalance -= amount;
+      if (userBalance < 0) userBalance = 0;
+      localStorage.setItem("userBalance", userBalance);
+      updateBalanceDisplay();
     }
 
-    // Sample promotion rotation
+    // Auto Slide Promotions
     const promos = [
-      "🏀 August 27-28 - Mobile Money Game! Use PayGo & Win Big!",
-      "🎉 Transact at Cheers Mall, Chrismar Hotel, Hot Spot for prizes!",
-      "📞 K20 Airtime Winners: Patience Ng'andwe, Phiri John!"
+      "🔥 Get Double Rewards This Week When You Invite Friends!",
+      "🎉 Win up to ₦5,000 Daily by Watching Videos!",
+      "💸 New PAY ID bonus active till Friday - Don't Miss Out!",
+      "📱 Buy Airtime and Earn Cashback Instantly!"
     ];
     let promoIndex = 0;
     setInterval(() => {
       promoIndex = (promoIndex + 1) % promos.length;
-      document.getElementById("promoText").innerText = promos[promoIndex];
-    }, 2000);
+      document.getElementById("promo-text").textContent = promos[promoIndex];
+    }, 4000);
   </script>
 </body>
 </html>
