@@ -3,200 +3,144 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard</title>
+  <title>PayGo Dashboard</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #8a00ff, #c87eff);
-      color: #fff;
-      overflow-x: hidden;
+      background-color: #f9f8ff;
     }
-
-    .top-banner {
-      background: white;
-      color: red;
+    .alert {
+      background-color: #fff0f0;
+      color: #d60000;
       font-weight: bold;
-      padding: 8px;
-      overflow: hidden;
-      position: relative;
+      padding: 10px 15px;
+      font-size: 14px;
+      text-align: left;
     }
-
-    .top-banner span {
-      display: inline-block;
-      white-space: nowrap;
-      animation: scroll-left 10s linear infinite;
-    }
-
-    @keyframes scroll-left {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-
     .card {
-      background: #8100e3;
+      background: #781ec5;
+      color: white;
       border-radius: 20px;
-      margin: 15px;
+      margin: 20px;
       padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-
-    .balance-section {
+    .card .name {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+    .card .balance {
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .buttons {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-    }
-
-    .balance-section h2 {
-      font-size: 28px;
-      margin: 10px 0 5px;
-    }
-
-    .balance-section small {
-      color: #e0dfff;
-    }
-
-    .bell {
-      background: rgba(255,255,255,0.1);
-      padding: 10px;
-      border-radius: 50%;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .bell::after {
-      content: "";
-      width: 10px;
-      height: 10px;
-      background: red;
-      border-radius: 50%;
-      position: absolute;
-      top: 6px;
-      right: 6px;
-    }
-
-    .actions {
-      display: flex;
-      justify-content: space-around;
       margin-top: 20px;
     }
-
-    .actions button {
-      background: #9b00f0;
+    .buttons button {
+      width: 48%;
+      padding: 12px;
       border: none;
-      color: white;
-      padding: 12px 25px;
       border-radius: 30px;
+      font-size: 16px;
       font-weight: bold;
+      color: white;
+      background-color: #9336fd;
       cursor: pointer;
     }
-
     .features {
-      background: #fff;
-      border-radius: 25px 25px 0 0;
-      padding: 20px 15px 30px 15px;
-      color: #000;
-    }
-
-    .features-grid {
-      max-width: 360px;
-      margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
       text-align: center;
-      font-size: 13px;
+      gap: 10px;
+      margin: 10px 20px;
     }
-
-    .features-grid div {
+    .features div {
+      font-size: 14px;
       cursor: pointer;
     }
-
     .promotions {
-      background: #8a00ff;
-      width: 100vw;
-      padding: 30px 10px;
-      box-sizing: border-box;
-      color: #fff;
-      font-size: 17px;
-      font-weight: bold;
-      text-align: center;
+      margin: 20px;
     }
-
-    h3 {
-      margin: 15px;
-      text-align: center;
+    .slider {
+      background-color: #ededff;
+      border-radius: 15px;
+      padding: 15px;
+      min-height: 80px;
+      color: #333;
+      font-weight: bold;
+      animation: slidePromo 10s infinite;
+    }
+    @keyframes slidePromo {
+      0% {opacity: 0; transform: translateX(20px);}
+      10% {opacity: 1; transform: translateX(0);}
+      90% {opacity: 1;}
+      100% {opacity: 0; transform: translateX(-20px);}
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Scrolling Notice -->
-  <div class="top-banner">
-    <span>🚫 Opay bank transfers. Please use other banks for your payments. 🚫</span>
+  <div class="alert">
+    ❗ ith Opay bank transfers. Please use other banks for your payment
   </div>
 
-  <!-- Balance Card -->
   <div class="card">
-    <div class="balance-section">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
       <div>
-        <strong>Hi, <span id="username">User</span> 👋</strong>
-        <p>Welcome back!</p>
-        <h2 id="balance">₦180,000.00</h2>
-        <small>Weekly Rewards: ₦180,000.00</small>
+        <div class="name">Hi, <span id="userName">User</span> 👋</div>
+        <div>Welcome back!</div>
       </div>
-      <div class="bell" onclick="location.href='history.html'">🔔</div>
+      <div>
+        <img src="bell.png" alt="bell" width="24">
+      </div>
     </div>
-
-    <!-- Upgrade / Transfer -->
-    <div class="actions">
+    <div style="margin-top: 15px;">
+      <div>Your Balance</div>
+      <div class="balance">₦180,000.00</div>
+      <div style="font-size: 14px;">Weekly Rewards: ₦180,000.00</div>
+    </div>
+    <div class="buttons">
       <button onclick="location.href='earn.html'">Upgrade</button>
       <button onclick="location.href='withdraw.html'">Transfer</button>
     </div>
   </div>
 
-  <!-- Features Section -->
   <div class="features">
-    <div class="features-grid">
-      <div onclick="location.href='buy.html'">💳<br/>Buy PAY ID</div>
-      <div onclick="location.href='watch.html'">📺<br/>Watch</div>
-      <div onclick="location.href='airtime.html'">📶<br/>Airtime</div>
-      <div onclick="location.href='data.html'">🛢<br/>Data</div>
-      <div onclick="location.href='support.html'">🎧<br/>Support</div>
-      <div onclick="location.href='group.html'">🌐<br/>Group</div>
-      <div onclick="location.href='earn.html'">💰<br/>Earn More</div>
-      <div onclick="location.href='profile.html'">👤<br/>Profile</div>
-    </div>
+    <div onclick="location.href='buy.html'">💳<br>Buy PAY ID</div>
+    <div onclick="location.href='watch.html'">📺<br>Watch</div>
+    <div onclick="location.href='airtime.html'">📶<br>Airtime</div>
+    <div onclick="location.href='data.html'">🛢️<br>Data</div>
+    <div onclick="location.href='support.html'">🎧<br>Support</div>
+    <div onclick="location.href='group.html'">🌐<br>Group</div>
+    <div onclick="location.href='earn.html'">💰<br>Earn More</div>
+    <div onclick="location.href='profile.html'">👤<br>Profile</div>
   </div>
 
-  <!-- Bigger Promotions Section Below Features -->
-  <div class="promotions" id="promoText">
-    🎁 Upgrade Now & Win Weekly Airtime Gifts!
+  <div class="promotions">
+    <div class="slider" id="promoSlider">🔥 Mobile Money Promo - AUG 27–28 (Zamtel, Airtel, MTN)</div>
   </div>
 
-  <!-- Script for username, balance -->
   <script>
-    // Set username from localStorage
-    const username = localStorage.getItem("paygo_username") || "User";
-    document.getElementById("username").textContent = username;
+    // Simulate user's name from registration
+    const registeredName = localStorage.getItem("userName") || "Khalifah";
+    document.getElementById("userName").textContent = registeredName;
 
-    // Set balance from localStorage
-    const balance = localStorage.getItem("paygo_balance") || "180000";
-    document.getElementById("balance").textContent = "₦" + Number(balance).toLocaleString("en-NG", {
-      minimumFractionDigits: 2,
-    });
-
-    // Optional: Animate text (slide promotions every few seconds)
-    const promotions = [
-      "🎁 Upgrade Now & Win Weekly Airtime Gifts!",
-      "🔥 Refer Friends & Get ₦500 Each!",
-      "📢 Mobile Money Bonuses This Week!",
+    // Text-based auto-slider
+    const promos = [
+      "🔥 Mobile Money Promo - AUG 27–28 (Zamtel, Airtel, MTN)",
+      "💸 Get ₦500 back every week with PAY ID",
+      "🎉 Refer friends & earn ₦1,000 each",
+      "🆓 Free data on first PAY ID purchase",
     ];
-    let index = 0;
+    let current = 0;
     setInterval(() => {
-      index = (index + 1) % promotions.length;
-      document.getElementById("promoText").textContent = promotions[index];
-    }, 3000);
+      current = (current + 1) % promos.length;
+      document.getElementById("promoSlider").textContent = promos[current];
+    }, 4000);
   </script>
 
 </body>
