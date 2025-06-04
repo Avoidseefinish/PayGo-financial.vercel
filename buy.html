@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buy PAY ID</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;
+      background-color: #ffffff;
+      color: #333;
+    }
+    .topbar {
+      background: #A020F0;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .container {
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+    input[readonly] {
+      background-color: #f8f8f8;
+      color: #666;
+    }
+    button {
+      margin-top: 30px;
+      width: 100%;
+      background: #A020F0;
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .note {
+      text-align: center;
+      margin-top: 15px;
+      color: #666;
+      font-size: 15px;
+    }
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 15px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">Buy PAY ID</div>
+
+  <div class="container">
+    <form id="payForm">
+      <label>Amount</label>
+      <input type="text" value="₦7,250" readonly>
+
+      <label>Full Name</label>
+      <input type="text" placeholder="Your full name" required>
+
+      <label>Your Email Address</label>
+      <input type="email" placeholder="email address" required>
+
+      <button type="submit">Pay</button>
+    </form>
+
+    <div class="note">
+      Your PAY ID will be displayed on the app once your payment is confirmed.
+    </div>
+
+    <div class="footer">
+      PayGo Financial Services LTD
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("payForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      window.location.href = "no.html";
+    });
+  </script>
+
+</body>
+</html>
