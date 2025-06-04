@@ -6,175 +6,199 @@
   <title>PayGo Dashboard</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background: #f6f6f9;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f0ff;
       color: #333;
     }
 
-    .top-banner {
-      background: #8000ff;
-      color: #fff;
-      padding: 15px;
-      font-size: 24px;
-      font-weight: bold;
-      text-align: center;
-      animation: blink 1s infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-
-    .dashboard-card {
+    .header {
       background: #8000ff;
       color: white;
-      border-radius: 20px;
-      padding: 20px;
-      margin: 20px;
+      padding: 15px;
+      text-align: center;
+      position: relative;
     }
 
-    .greeting {
-      font-size: 18px;
+    .paygo-logo {
+      font-size: 24px;
+      font-weight: bold;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-3px); }
+    }
+
+    .user-box {
+      background: #a400ff;
+      margin: 15px;
+      border-radius: 15px;
+      padding: 20px;
+      color: white;
+    }
+
+    .user-name {
+      font-size: 20px;
+      margin-bottom: 5px;
     }
 
     .balance {
       font-size: 32px;
       font-weight: bold;
-      margin: 10px 0;
+      margin-top: 10px;
     }
 
-    .weekly {
-      font-size: 14px;
+    .bell {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      cursor: pointer;
     }
 
-    .actions {
+    .buttons {
       display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
+      justify-content: space-around;
+      margin: 20px 0;
     }
 
-    .btn {
+    .buttons button {
       background: white;
-      color: #8000ff;
+      border: none;
       padding: 10px 20px;
-      border-radius: 25px;
+      border-radius: 10px;
       font-weight: bold;
-      text-decoration: none;
-      text-align: center;
-      flex: 1;
-      margin: 5px;
+      cursor: pointer;
     }
 
-    .icons-grid {
+    .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       text-align: center;
-      margin: 20px;
+      gap: 10px;
+      padding: 0 15px;
     }
 
-    .icons-grid div {
-      margin: 10px 0;
+    .grid div {
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      cursor: pointer;
     }
 
-    .icons-grid a {
-      text-decoration: none;
-      color: #333;
-      font-size: 14px;
-      display: block;
+    .grid img {
+      width: 30px;
+      height: 30px;
+      margin-bottom: 5px;
     }
 
     .promotions {
-      background: white;
-      border-radius: 15px;
-      margin: 20px;
-      padding: 15px;
+      margin: 20px 15px;
     }
 
-    .promo-slide {
-      display: none;
-      font-weight: bold;
-      color: #8000ff;
-      font-size: 18px;
+    .promo-banner {
+      background: #52008b;
+      color: white;
+      border-radius: 10px;
+      padding: 20px;
+      min-height: 100px;
       text-align: center;
+      font-size: 14px;
+      display: none;
     }
 
-    .promo-slide.active {
+    .promo-banner.active {
       display: block;
     }
-
-    .promo-slide p {
-      font-size: 14px;
-      color: #333;
-    }
-
   </style>
 </head>
-<body>
+<body onload="loadUser()">
 
-  <div class="top-banner" id="paygoText">PayGo</div>
-
-  <div class="dashboard-card">
-    <div class="greeting">Hi, <span id="username">User</span> 👋<br>Welcome back!</div>
-    <div class="balance">₦180,000.00</div>
-    <div class="weekly">Weekly Rewards: ₦180,000.00</div>
-    <div class="actions">
-      <a href="earn.html" class="btn">Upgrade</a>
-      <a href="withdraw.html" class="btn">Transfer</a>
-    </div>
+  <div class="header">
+    <span class="paygo-logo">PayGo</span>
+    <img src="https://img.icons8.com/fluency/48/appointment-reminders.png" class="bell" onclick="goToHistory()" width="24"/>
   </div>
 
-  <div class="icons-grid">
-    <div><a href="buy.html">Buy PAY ID</a></div>
-    <div><a href="watch.html">Watch</a></div>
-    <div><a href="airtime.html">Airtime</a></div>
-    <div><a href="data.html">Data</a></div>
-    <div><a href="support.html">Support</a></div>
-    <div><a href="group.html">Group</a></div>
-    <div><a href="earn.html">Earn More</a></div>
-    <div><a href="profile.html">Profile</a></div>
+  <div class="user-box">
+    <div class="user-name">Hi, <span id="username">User</span> 👋</div>
+    <div>Your Balance</div>
+    <div class="balance" id="balance">₦0.00</div>
+    <div>Weekly Rewards: ₦0.00</div>
+  </div>
+
+  <div class="buttons">
+    <button onclick="location.href='earn.html'">Upgrade</button>
+    <button onclick="location.href='withdraw.html'">Transfer</button>
+  </div>
+
+  <div class="grid">
+    <div onclick="location.href='buy.html'">
+      <img src="https://img.icons8.com/fluency/48/wallet.png"/><br>Buy PAY ID
+    </div>
+    <div onclick="location.href='watch.html'">
+      <img src="https://img.icons8.com/fluency/48/tv.png"/><br>Watch
+    </div>
+    <div onclick="location.href='airtime.html'">
+      <img src="https://img.icons8.com/fluency/48/cell-phone.png"/><br>Airtime
+    </div>
+    <div onclick="location.href='data.html'">
+      <img src="https://img.icons8.com/fluency/48/data-in-both-directions.png"/><br>Data
+    </div>
+    <div onclick="location.href='support.html'">
+      <img src="https://img.icons8.com/fluency/48/headphones.png"/><br>Support
+    </div>
+    <div onclick="location.href='group.html'">
+      <img src="https://img.icons8.com/fluency/48/groups.png"/><br>Group
+    </div>
+    <div onclick="location.href='earn.html'">
+      <img src="https://img.icons8.com/fluency/48/money-bag.png"/><br>Earn More
+    </div>
+    <div onclick="location.href='profile.html'">
+      <img src="https://img.icons8.com/fluency/48/user.png"/><br>Profile
+    </div>
   </div>
 
   <div class="promotions">
-    <h3>Current Promotions</h3>
-    <div class="promo-slide active">
-      <div>Transact & Win</div>
-      <p>Locations: Cheers Gold Crest Mall | Chrismar Hotel | Hot Spot Pub & Grill<br>All customers who pay with PayGo in store will stand a chance to win great prizes.</p>
+    <div class="promo-banner active">
+      <strong>🎯 AUGUST 27–28</strong><br>PAYGO Mobile Money Tickets – Airtel, MTN, Zamtel
     </div>
-    <div class="promo-slide">
-      <div>Winners of K20 Airtime</div>
-      <p>Patience Ng’andwe<br>Phiri John</p>
+    <div class="promo-banner">
+      <strong>🎁 Transact & Win</strong><br>Locations: Cheers Gold Crest Mall, ChrisMar Hotel, Hot Spot Pub & Grill
     </div>
-    <div class="promo-slide">
-      <div>Mobile Money Event</div>
-      <p>August 27–28 at 12:00 & 14:00, 16:00 Hours – MTN, Airtel, Zamtel</p>
+    <div class="promo-banner">
+      <strong>🏆 Winners of K20 Airtime</strong><br>Patience Ng’andwe, Phiri John
     </div>
   </div>
 
   <script>
-    // Animate "PayGo"
+    function loadUser() {
+      let user = localStorage.getItem("paygoUser") || "User";
+      let balance = parseFloat(localStorage.getItem("paygoBalance") || "180000");
+      document.getElementById("username").innerText = user;
+      document.getElementById("balance").innerText = "₦" + balance.toLocaleString(undefined, {minimumFractionDigits: 2});
+    }
+
+    function updateBalance(amount) {
+      let balance = parseFloat(localStorage.getItem("paygoBalance") || "180000");
+      balance -= amount;
+      localStorage.setItem("paygoBalance", balance);
+      document.getElementById("balance").innerText = "₦" + balance.toLocaleString(undefined, {minimumFractionDigits: 2});
+    }
+
+    function goToHistory() {
+      window.location.href = "history.html";
+    }
+
+    // Promotion slider
+    let current = 0;
     setInterval(() => {
-      const paygo = document.getElementById("paygoText");
-      paygo.style.opacity = paygo.style.opacity === "0.5" ? "1" : "0.5";
-    }, 1000);
-
-    // Show user's registered name
-    document.addEventListener("DOMContentLoaded", () => {
-      const username = localStorage.getItem("username") || "User";
-      document.getElementById("username").innerText = username;
-    });
-
-    // Sliding promotion
-    let promoIndex = 0;
-    const promos = document.querySelectorAll(".promo-slide");
-
-    setInterval(() => {
-      promos.forEach(p => p.classList.remove("active"));
-      promoIndex = (promoIndex + 1) % promos.length;
-      promos[promoIndex].classList.add("active");
+      const banners = document.querySelectorAll(".promo-banner");
+      banners.forEach(b => b.classList.remove("active"));
+      current = (current + 1) % banners.length;
+      banners[current].classList.add("active");
     }, 2000);
   </script>
-
 </body>
 </html>
