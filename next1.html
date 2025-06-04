@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome Bonus</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f8f8;
+    }
+
+    .overlay {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      background: linear-gradient(to right, #a000ff, #ff5722);
+      color: white;
+      padding: 20px;
+      position: relative;
+      text-align: left;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .modal-header .step {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-top: 6px;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      font-size: 18px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background-color: #fff4;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .progress {
+      width: 20%;
+      height: 100%;
+      background: white;
+    }
+
+    .modal-body {
+      padding: 25px 20px;
+      text-align: center;
+    }
+
+    .modal-body .icon {
+      font-size: 40px;
+      color: #a000ff;
+      margin-bottom: 15px;
+    }
+
+    .modal-body h3 {
+      font-size: 20px;
+      margin: 5px 0 15px;
+    }
+
+    .modal-body p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .next-button {
+      background: linear-gradient(to right, #a000ff, #ff5722);
+      color: white;
+      border: none;
+      padding: 14px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 0 0 20px 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="welcomeText">Welcome to PayGo!</h2>
+      <div class="step">Step 1 of 5</div>
+      <div class="progress-bar"><div class="progress"></div></div>
+      <div class="close-btn" onclick="window.location.href='next2.html'">×</div>
+    </div>
+    <div class="modal-body">
+      <div class="icon">🎁</div>
+      <h3>Welcome Bonus</h3>
+      <p>
+        You've received a welcome bonus of <strong>₦180,000!</strong> This amount is already in your account and can be withdrawn after purchasing a PAY ID.
+      </p>
+    </div>
+    <button class="next-button" onclick="window.location.href='next2.html'">Next →</button>
+  </div>
+</div>
+
+<script>
+  // Get username from localStorage
+  const name = localStorage.getItem("username") || "User";
+  document.getElementById("welcomeText").innerText = `Welcome to PayGo, ${name}!`;
+</script>
+
+</body>
+</html>
