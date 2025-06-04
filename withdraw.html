@@ -183,6 +183,14 @@
       }
 
       errorMsg.textContent = "";
+     // Get current balance from localStorage
+   const currentBalance = parseFloat(localStorage.getItem("balance")) || 0;
+
+   // Calculate new balance after withdrawal
+    const newBalance = currentBalance - parseFloat(amount);
+
+    // Save the new balance
+    localStorage.setItem("balance", newBalance);
       localStorage.setItem("lastTransferAmount", "₦" + amount);
      window.location.href = "loading1.html";
    
